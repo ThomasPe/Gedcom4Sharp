@@ -4,7 +4,10 @@ using System.Text;
 
 namespace Gedcom4Sharp.Models.Gedcom
 {
-    class HasCustomFacts
+    public interface HasCustomFacts
     {
+        List<CustomFact> CustomFacts { get; set; }
+
+        List<CustomFact> GetCustomFactsWithTag(string tag);
     }
 }

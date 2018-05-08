@@ -1,0 +1,44 @@
+﻿using Gedcom4Sharp.Models.Utils;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
+
+namespace Gedcom4Sharp.Parser
+{
+    public class StringTreeBuilder
+    {
+        /// <summary>
+        /// An array of references to the most recently added node for each given level. Works as a fast index to the nodes so we can
+        /// find parents quickly. Whenever a new node is added, set, or removed for level N, all entries in this index > N (i.e., all
+        /// the child levels) need to be cleared.
+        /// </summary>
+        private readonly StringTree[] lastNodeAtLevel = new StringTree[100];
+
+        /// <summary>
+        /// A flag indicating whether the current line from the input file begins with a 1-2 digit level number followed by a space
+        /// </summary>
+        private bool beginsWithLevelAndSpace;
+
+        /// <summary>
+        /// The string tree node that represents the current line and all its children.
+        /// </summary>
+        private StringTree treeForCurrentLine;
+
+        /// <summary>
+        ///  A base StringTree to hold a single root-level node
+        /// </summary>
+        private readonly StringTree wrapperNode = new StringTree();
+
+        /// <summary>
+        /// The most recently added node
+        /// </summary>
+        private StringTree mostRecentlyAdded;
+
+        
+
+
+
+
+    }
+}

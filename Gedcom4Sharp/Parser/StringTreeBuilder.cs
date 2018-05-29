@@ -35,10 +35,33 @@ namespace Gedcom4Sharp.Parser
         /// </summary>
         private StringTree mostRecentlyAdded;
 
-        
+        /// <summary>
+        /// The line number we're on - 1-based!
+        /// </summary>
+        private int lineNum = 0;
+
+        /// <summary>
+        /// The line we're currently processing
+        /// </summary>
+        private string line;
 
 
 
+        private bool IsNewLevelLine(string line)
+        {
+            var isNewLevelLine = false;
+            if (Char.IsNumber(line[0]))
+            {
+                if (Char.IsWhiteSpace(line[1])) {
+                    isNewLevelLine = true;
+                }
+                else if(Char.IsNumber(line[1]) && Char.IsWhiteSpace(line[2]))
+                {
+                    isNewLevelLine = true;
+                }
+            }
+            return isNewLevelLine;
+        }
 
     }
 }

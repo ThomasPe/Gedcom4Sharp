@@ -68,7 +68,7 @@ namespace Gedcom4Sharp.Parser
         public bool StrictLineBreaks { get; set; } = true;
 
 
-        public void Load(Stream stream)
+        public void Load(string filePath)
         {
             Gedcom = new Gedcom();
             lineNum = 0;
@@ -76,7 +76,24 @@ namespace Gedcom4Sharp.Parser
             warnings.Clear();
             cancelled = false;
 
-            
+            if (File.Exists(filePath))
+            {
+                foreach (string line in File.ReadLines(filePath))
+                {
+                    if(line[0] == '0')
+                    {
+                        // parseAndLoadPreviousStringTree();
+                    }
+                    lineNum++;
+                    //stringTreeBuilder
+                }
+            }
+            else
+            {
+                throw new FileNotFoundException($"{filePath} was not found");
+            }
+
+
         }
     }
 }

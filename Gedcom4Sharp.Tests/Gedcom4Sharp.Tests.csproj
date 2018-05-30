@@ -48,11 +48,18 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Parser\LinePieces.Tests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\TortureFiles\EnglishTudorHouse.ged" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Gedcom4Sharp\Gedcom4Sharp.csproj">
+      <Project>{936f8517-7716-462c-b206-4e29f67a565f}</Project>
+      <Name>Gedcom4Sharp</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

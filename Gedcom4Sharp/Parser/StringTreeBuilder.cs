@@ -18,34 +18,43 @@ namespace Gedcom4Sharp.Parser
         /// <summary>
         /// A flag indicating whether the current line from the input file begins with a 1-2 digit level number followed by a space
         /// </summary>
-        private bool beginsWithLevelAndSpace;
+        private bool _beginsWithLevelAndSpace;
 
         /// <summary>
         /// The string tree node that represents the current line and all its children.
         /// </summary>
-        private StringTree treeForCurrentLine;
+        private StringTree _treeForCurrentLine;
 
         /// <summary>
         ///  A base StringTree to hold a single root-level node
         /// </summary>
-        private readonly StringTree wrapperNode = new StringTree();
+        private readonly StringTree _wrapperNode = new StringTree();
 
         /// <summary>
         /// The most recently added node
         /// </summary>
-        private StringTree mostRecentlyAdded;
+        private StringTree _mostRecentlyAdded;
+
+        /// <summary>
+        /// The GedcomParser instance this object is building StringTree instances for
+        /// </summary>
+        private readonly GedcomParser _parser;
 
         /// <summary>
         /// The line number we're on - 1-based!
         /// </summary>
-        private int lineNum = 0;
+        private int _lineNum = 0;
 
         /// <summary>
         /// The line we're currently processing
         /// </summary>
-        private string line;
+        private string _line;
 
-
+        public StringTreeBuilder(GedcomParser parser)
+        {
+            _parser = parser;
+            _wrapperNode.setLevel(-1);
+        }
 
         private bool IsNewLevelLine(string line)
         {

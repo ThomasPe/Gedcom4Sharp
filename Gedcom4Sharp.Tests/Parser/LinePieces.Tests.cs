@@ -29,5 +29,26 @@ namespace Gedcom4Sharp.Tests
             var ex = Assert.ThrowsException<Exception>(() => new LinePieces("4 @XREF TAGG additional stuff", 5));
             Assert.AreEqual("XRef ID begins with @ sign but is not terminated with one on line 5", ex.Message);
         }
+
+        /// <summary>
+        /// Negative test case when there is no tag
+        /// </summary>
+        [TestMethod]
+        public void LinePieces_NegativeNothingAfterXref()
+        {
+            var ex = Assert.ThrowsException<Exception>(() => new LinePieces("4 @XREF@", 5));
+            Assert.AreEqual("All GEDCOM lines are required to have a tag value, but no tag could be found on line 5", ex.Message);
+        }
+
+        [TestMethod]
+        public void LinePieces_Positive()
+        {
+            var lp = new LinePieces("4 @XREF@ TAGG additional stuff", 5);
+            Assert.IsNotNull(lp);
+            Assert.AreEqual(4, lp.Level);
+            Assert.AreEqual("@XREF@", lp.Id);
+            Assert.AreEqual("TAGG", lp.Tag);
+            Assert.AreEqual("additional stuff", lp.Remainder);
+        }
     }
 }

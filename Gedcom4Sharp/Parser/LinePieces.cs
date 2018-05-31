@@ -49,19 +49,18 @@ namespace Gedcom4Sharp.Parser
             line = lineToParse;
             
             // iterate over line parts
-            var i = 0;
             var linePieces = line.Split(' ');
 
-            Level = ProcessLevel(linePieces[i]);
-            i++;
+            Level = ProcessLevel(linePieces[0]);
 
-            Id = ProcessXrefId(linePieces[i]);
+            Id = ProcessXrefId(linePieces);
+            var i = 1;
             if (!String.IsNullOrEmpty(Id))
             {
                 i++;
             }
 
-            Tag = ProcessTag(linePieces[i]);
+            Tag = ProcessTag(linePieces, i);
             i++;
 
             Remainder = ProcessRemainder(linePieces, i);
@@ -96,35 +95,37 @@ namespace Gedcom4Sharp.Parser
             }
             try
             {
-                return string.Join(" ", chars.Skip(i - 1));
+                return string.Join(" ", chars.Skip(i));
             }
             catch
             {
-                throw new Exception($"All GEDCOM lines are required to have a tag value, but no tag could be found on line {line}");
+                throw new Exception($"All GEDCOM lines are required to have a tag value, but no tag could be found on line {lineNum}");
             }
         }
 
         /// <summary>
         /// Process the tag portion of the line
         /// </summary>
-        private string ProcessTag(string tag)
+        private string ProcessTag(string[] line, int i)
         {
-            if (String.IsNullOrEmpty(tag))
+            if (i >= line.Length || String.IsNullOrEmpty(line[i]))
             {
-                throw new Exception($"All GEDCOM lines are required to have a tag value, but no tag could be found on line {line}");
+                throw new Exception($"All GEDCOM lines are required to have a tag value, but no tag could be found on line {lineNum}");
             }
-            return tag;
+            return line[i];
         }
 
         
-        private string ProcessXrefId(string xrefId)
+        private string ProcessXrefId(string[] line)
         {
+            var xrefId = line[1];
             if (xrefId.StartsWith("@"))
             {
                 if (xrefId.EndsWith("@"))
                 {
+                    return xrefId;
                     // return Tag without surrounding @'s
-                    return xrefId.Substring(1, xrefId.Length - 2);
+                    //return xrefId.Substring(1, xrefId.Length - 2);
                 } else
                 {
                     throw new Exception($"XRef ID begins with @ sign but is not terminated with one on line {lineNum}");

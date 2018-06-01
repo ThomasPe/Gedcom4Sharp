@@ -9,7 +9,7 @@ namespace Gedcom4Sharp.Models.Utils
         /// <summary>
         /// All the elements that are child elements of this element
         /// </summary>
-        public List<StringTree> Children { get; set; }
+        public List<StringTree> Children { get; set; } = new List<StringTree>();
 
         /// <summary>
         /// The level of this element

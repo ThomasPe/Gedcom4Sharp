@@ -16,6 +16,10 @@ namespace Gedcom4Sharp.Models.Gedcom
         public StringWithCustomFacts RegFileNumber { get; set; }
         public List<UserReference> UserReferences { get; set; }
 
+        public Submitter()
+        {
+            // Default constructor
+        }
         public Submitter(string xref, string submitterName)
         {
             Xref = xref;

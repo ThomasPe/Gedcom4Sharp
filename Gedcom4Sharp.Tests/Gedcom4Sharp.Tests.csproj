@@ -54,6 +54,7 @@
   <ItemGroup>
     <None Include="Assets\TortureFiles\EnglishTudorHouse.ged" />
     <None Include="packages.config" />
+    <Compile Include="Utility\ArrayExtensions.Tests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Gedcom4Sharp\Gedcom4Sharp.csproj">

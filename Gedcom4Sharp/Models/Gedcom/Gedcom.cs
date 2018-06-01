@@ -20,7 +20,7 @@ namespace Gedcom4Sharp.Models.Gedcom
         /// <summary>
         /// All the individuals in the GEDCOM file. The map is keyed on the individual cross-reference numbers and the individuals themselves are in the value set.
         /// </summary>
-        public Dictionary<string, Individual> Individual { get; set; }
+        public Dictionary<string, Individual> Individuals { get; set; }
 
         /// <summary>
         /// All the multimedia items in the GEDCOM file. The map is keyed by the multimedia cross-reference numbers, and the

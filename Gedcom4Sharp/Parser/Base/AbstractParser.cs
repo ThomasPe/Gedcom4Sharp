@@ -288,7 +288,7 @@ namespace Gedcom4Sharp.Parser.Base
             {
                 return;
             }
-            var beginsWithUnderscore = node.Tag.Length > 0 && node.Tag[0] == '_';
+            bool beginsWithUnderscore = !String.IsNullOrEmpty(node.Tag) && node.Tag[0] == '_';
             if(beginsWithUnderscore || !_gedcomParser.StrictCustomTags || _gedcomParser.InsideCustomTag)
             {
                 var cf = new CustomFact(node.Tag);

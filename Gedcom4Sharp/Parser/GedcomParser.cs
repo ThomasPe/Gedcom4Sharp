@@ -45,7 +45,7 @@ namespace Gedcom4Sharp.Parser
         /// <summary>
         /// Are we currently parsing somewhere inside a custom tag?
         /// </summary>
-        private bool _insideCustomTag;
+        public bool InsideCustomTag;
 
         /// <summary>
         /// The content of the gedcom file

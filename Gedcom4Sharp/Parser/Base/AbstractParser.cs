@@ -69,7 +69,7 @@ namespace Gedcom4Sharp.Parser.Base
         /// <returns></returns>
         protected Individual GetIndividual(string xref)
         {
-            if(!_gedcomParser.Gedcom.Individuals.TryGetValue(xref, out Individual i){
+            if(!_gedcomParser.Gedcom.Individuals.TryGetValue(xref, out Individual i)){
                 i = new Individual
                 {
                     Xref = xref
@@ -268,10 +268,61 @@ namespace Gedcom4Sharp.Parser.Base
             }
         }
 
-        private void UnknownTag(StringTree ch, AbstractElement element)
+        /// <summary>
+        /// Default handler for a tag that the parser was not expecting to see.
+        /// - If custom tags are ignored in the parser (see {@link GedcomParser#isIgnoreCustomTags()}), the custom/unknown tag and all
+        ///   its children will be ignored, regardless of the value of the strict custom tags setting(because it doesn't make sense to be
+        ///   strict about tags that are being ignored).
+        /// - If the tag begins with an underscore, it is a user-defined tag, which is stored in the customFacts collection of the
+        ///   passed in element, and returns.
+        /// - If GedcomParser.StrictCustomTags parsing is turned off (i.e., == false), it is treated as a user-defined tag
+        ///   (despite the lack of beginning underscore) and treated like any other user-defined tag.
+        /// - If {@link GedcomParser#isStrictCustomTags()} parsing is turned on (i.e., == true), it is treated as bad tag and an error
+        ///   is logged in the GedcomParser.Errors collection, and then the tag and its children are ignored.
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="element"></param>
+        protected void UnknownTag(StringTree node, HasCustomFacts element)
         {
-            // TODO UnknownTag
-            throw new NotImplementedException();
+            if (_gedcomParser.IgnoreCustomTags)
+            {
+                return;
+            }
+            var beginsWithUnderscore = node.Tag.Length > 0 && node.Tag[0] == '_';
+            if(beginsWithUnderscore || !_gedcomParser.StrictCustomTags || _gedcomParser.InsideCustomTag)
+            {
+                var cf = new CustomFact(node.Tag);
+                cf.Xref = node.Xref;
+                cf.Description = new StringWithCustomFacts(node.Value);
+                element.CustomFacts.Add(cf);
+                // Save current value
+                var saveIsInisdeCustomTag = _gedcomParser.InsideCustomTag;
+                _gedcomParser.InsideCustomTag = true;
+                new CustomFactParser(_gedcomParser, node, cf).parse();
+                // Restore prior value
+                _gedcomParser.InsideCustomTag = saveIsInisdeCustomTag;
+                return;
+            }
+
+            var sb = new StringBuilder();
+            sb.Append($"Line {node.LineNum}: Cannot handle tag {node.Tag}");
+            var st = node;
+            while(st.Parent != null)
+            {
+                st = st.Parent;
+                sb.Append($", child of {st.Tag}");
+                if(st.Xref != null)
+                {
+                    sb.Append($" {st.Xref}");
+                }
+                sb.Append($" on line {st.LineNum}");
+            }
+            _gedcomParser.Errors.Add(sb.ToString());
         }
+
+        /// <summary>
+        /// Parse the string tree passed into the constructor, and load it into the object model
+        /// </summary>
+        public abstract void Parse();
     }
 }

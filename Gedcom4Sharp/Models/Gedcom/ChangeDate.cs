@@ -2,7 +2,7 @@
 
 namespace Gedcom4Sharp.Models.Gedcom
 {
-    public class ChangeDate : AbstractElement
+    public class ChangeDate : AbstractNotesElement
     {
         public StringWithCustomFacts Date { get; set; }
         public StringWithCustomFacts Time { get; set; }

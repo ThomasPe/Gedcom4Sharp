@@ -268,10 +268,20 @@ namespace Gedcom4Sharp.Parser.Base
             }
         }
 
-        private void UnknownTag(StringTree ch, AbstractElement element)
+        private void UnknownTag(StringTree node, HasCustomFacts element)
         {
-            // TODO UnknownTag
-            throw new NotImplementedException();
+            if (_gedcomParser.IgnoreCustomTags)
+            {
+                return;
+            }
+            bool beginsWithUnderscore = !String.IsNullOrEmpty(node.Tag) && node.Tag[0] == '_';
+            if(beginsWithUnderscore || !_gedcomParser.StrictCustomTags || _gedcomParser.IsInsideCustomTag)
+            {
+                var cf = new CustomFact(node.Tag);
+                cf.Xref = node.Xref;
+                cf.Desc() = node.Value;
+                bool saveIsInsideCustomTag = _gedcomParser.IsInsideCustomTag;
+            }
         }
     }
 }

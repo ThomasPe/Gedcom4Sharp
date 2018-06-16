@@ -72,6 +72,12 @@ namespace Gedcom4Sharp.Parser
         public bool StrictLineBreaks { get; set; } = true;
 
 
+        /// <summary>
+        /// Are we currently parsing somewhere inside a custom tag?
+        /// </summary>
+        public bool IsInsideCustomTag { get; set; }
+
+
         public void Load(string filePath)
         {
             Gedcom = new Gedcom();

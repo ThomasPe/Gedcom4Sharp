@@ -1,6 +1,7 @@
 ﻿using Gedcom4Sharp.Models.Gedcom;
 using Gedcom4Sharp.Models.Gedcom.Enums;
 using Gedcom4Sharp.Models.Utils;
+using Gedcom4Sharp.Parser.Base;
 using Gedcom4Sharp.Utility.Extensions;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace Gedcom4Sharp.Parser
     /// 
     /// TODO: Parser Progress Obeservers / Notifications
     /// </summary>
-    public class GedcomParser
+    public class GedcomParser : AbstractParser<Gedcom>
     {
         /// <summary>
         /// The things that went wrong while parsing the gedcom file
@@ -46,6 +47,14 @@ namespace Gedcom4Sharp.Parser
         /// Are we currently parsing somewhere inside a custom tag?
         /// </summary>
         public bool InsideCustomTag;
+
+        /// <summary>
+        /// Default Constructor
+        /// This is the root level parser, so there are no parent or other root nodes to hook up to (yet)
+        /// </summary>
+        public GedcomParser() : base(null, null, null)
+        {
+        }
 
         /// <summary>
         /// The content of the gedcom file
@@ -141,7 +150,20 @@ namespace Gedcom4Sharp.Parser
                 {
                     Gedcom.Header = new Header();
                 }
+                new HeaderParser(this, rootLevelItem, Gedcom.Header);
             }
+            else if (Tag.SUBMITTER.Desc().Equals(rootLevelItem.Tag))
+            {
+                var submitter = GetSubmitter(rootLevelItem.Xref);
+                new SubmitterParser(this, rootLevelItem, submitter).Parse();
+            }
+
+            // TODO Finish Parser
+        }
+
+        public override void Parse()
+        {
+            throw new NotImplementedException();
         }
     }
 }

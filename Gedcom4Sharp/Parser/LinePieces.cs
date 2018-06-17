@@ -55,7 +55,7 @@ namespace Gedcom4Sharp.Parser
 
             Id = ProcessXrefId(linePieces);
             var i = 1;
-            if (!String.IsNullOrEmpty(Id))
+            if (!string.IsNullOrEmpty(Id))
             {
                 i++;
             }
@@ -108,7 +108,7 @@ namespace Gedcom4Sharp.Parser
         /// </summary>
         private string ProcessTag(string[] line, int i)
         {
-            if (i >= line.Length || String.IsNullOrEmpty(line[i]))
+            if (i >= line.Length || string.IsNullOrEmpty(line[i]))
             {
                 throw new Exception($"All GEDCOM lines are required to have a tag value, but no tag could be found on line {lineNum}");
             }

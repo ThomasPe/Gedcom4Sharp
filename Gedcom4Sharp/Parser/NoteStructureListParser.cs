@@ -41,20 +41,20 @@ namespace Gedcom4Sharp.Parser
                         else
                         {
                             var lastNote = noteStructure.Lines.LastOrDefault();
-                            if (String.IsNullOrEmpty(lastNote))
+                            if (string.IsNullOrEmpty(lastNote))
                             {
-                                noteStructure.Lines[noteStructure.Lines.Count() - 1] = ch.Value;
+                                noteStructure.Lines[noteStructure.Lines.Count - 1] = ch.Value;
                             }
                             else
                             {
-                                noteStructure.Lines[noteStructure.Lines.Count() - 1] = lastNote + ch.Value;
+                                noteStructure.Lines[noteStructure.Lines.Count - 1] = lastNote + ch.Value;
 
                             }
                         }
                     }
                     else if (ch.Tag == Tag.CONTINUATION.Desc())
                     {
-                        noteStructure.Lines.Add(String.IsNullOrEmpty(ch.Value) ? "" : ch.Value);
+                        noteStructure.Lines.Add(string.IsNullOrEmpty(ch.Value) ? "" : ch.Value);
                     }
                     else
                     {

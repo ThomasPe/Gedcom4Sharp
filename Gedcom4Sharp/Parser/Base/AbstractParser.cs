@@ -230,7 +230,7 @@ namespace Gedcom4Sharp.Parser.Base
                     var cf = new CustomFact(gch.Tag);
                     swcf.CustomFacts.Add(cf);
                     cf.Xref = gch.Xref;
-                    new CustomFactParser(_gedcomParser, gch, cf).parse();
+                    new CustomFactParser(_gedcomParser, gch, cf).Parse();
                 }
             }
             return swcf;
@@ -298,7 +298,7 @@ namespace Gedcom4Sharp.Parser.Base
                 // Save current value
                 var saveIsInisdeCustomTag = _gedcomParser.InsideCustomTag;
                 _gedcomParser.InsideCustomTag = true;
-                new CustomFactParser(_gedcomParser, node, cf).parse();
+                new CustomFactParser(_gedcomParser, node, cf).Parse();
                 // Restore prior value
                 _gedcomParser.InsideCustomTag = saveIsInisdeCustomTag;
                 return;

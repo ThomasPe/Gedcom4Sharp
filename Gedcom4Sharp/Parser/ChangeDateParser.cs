@@ -11,7 +11,7 @@ namespace Gedcom4Sharp.Parser
 {
     public class ChangeDateParser : AbstractParser<ChangeDate>
     {
-        public ChangeDateParser(GedcomParser gedcomParser, StringTree stringTree, CustomFact loadInto) : base(gedcomParser, stringTree, loadInto)
+        public ChangeDateParser(GedcomParser gedcomParser, StringTree stringTree, ChangeDate loadInto) : base(gedcomParser, stringTree, loadInto)
         {
         }
 
@@ -42,7 +42,7 @@ namespace Gedcom4Sharp.Parser
                     else if(ch.Tag == Tag.NOTE.Desc())
                     {
                         List<NoteStructure> notes = _loadInto.NoteStructures;
-                        new NoteStructureListParser(_gedcomParser, ch, notes).parse();
+                        new NoteStructureListParser(_gedcomParser, ch, notes).Parse();
                     }
                     else
                     {

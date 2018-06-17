@@ -65,8 +65,28 @@ namespace Gedcom4Sharp.Parser
                         _loadInto.ChangeDate = new ChangeDate();
                         new ChangeDateParser(_gedcomParser, ch, _loadInto.ChangeDate);
                     }
+                    else if (Tag.OBJECT_MULTIMEDIA.Desc().Equals(ch.Tag))
+                    {
+                        new MultimediaLinkParser(_gedcomParser, ch, _loadInto.Multimedia).Parse();
+                    }
+                    else if (Tag.RECORD_ID_NUMBER.Desc().Equals(ch.Tag))
+                    {
+                        _loadInto.RecIdNumber = ParseStringWithCustomFacts(ch);
+                    }
+                    else if (Tag.REGISTRATION_FILE_NUMBER.Desc().Equals(ch.Tag))
+                    {
+                        _loadInto.RegFileNumber = ParseStringWithCustomFacts(ch);
+                    } 
+                    else if (Tag.NOTE.Desc().Equals(ch.Tag))
+                    {
+                        var notes = _loadInto.NoteStructures;
+                        new NoteStructureListParser(_gedcomParser, ch, notes).Parse();
+                    }
+                    else
+                    {
+                        UnknownTag(ch, _loadInto);
+                    }
                 }
-                // TODO finish SubmitterParser
             }
         }
     }

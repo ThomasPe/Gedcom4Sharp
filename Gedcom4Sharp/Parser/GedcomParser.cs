@@ -157,6 +157,11 @@ namespace Gedcom4Sharp.Parser
                 var submitter = GetSubmitter(rootLevelItem.Xref);
                 new SubmitterParser(this, rootLevelItem, submitter).Parse();
             }
+            else if (Tag.INDIVIDUAL.Desc().Equals(rootLevelItem.Tag))
+            {
+                var i = GetIndividual(rootLevelItem.Xref);
+                new IndividualParser(this, rootLevelItem, i).Parse();
+            }
 
             // TODO Finish Parser
         }

@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using Gedcom4Sharp.Models.Gedcom.Base;
+using System.Collections.Generic;
 
 namespace Gedcom4Sharp.Models.Gedcom
 {
-    public class MultiStringWithCustomFacts
+    public class MultiStringWithCustomFacts : AbstractElement
     {
         public List<string> Lines { get; set; }
     }

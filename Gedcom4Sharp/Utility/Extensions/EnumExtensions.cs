@@ -47,10 +47,23 @@ namespace Gedcom4Sharp.Utility.Extensions
             var dict = list.Select(v => new {
                 Value = v,
                 Description = Desc(v)
-            }
-                       )
-                           .ToDictionary(x => x.Description, x => x.Value);
+            }).ToDictionary(x => x.Description, x => x.Value);
             return dict[description];
+        }
+
+        public static bool TryParseDescriptionToEnum<T>(string description, out T obj)
+        {
+            var success = true;
+            obj = default(T);
+            try
+            {
+                obj = ParseDescriptionToEnum<T>(description);
+            }
+            catch (Exception ex)
+            {
+                success = false;
+            }
+            return success;
         }
     }
 }

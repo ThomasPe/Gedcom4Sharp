@@ -5,6 +5,7 @@ using Gedcom4Sharp.Models.Utils;
 using Gedcom4Sharp.Utility.Extensions;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Gedcom4Sharp.Parser.Base
@@ -214,6 +215,52 @@ namespace Gedcom4Sharp.Parser.Base
                 }
             }
         }
+
+        protected void LoadMultiStringWithCustomFacts(StringTree stringTreeWithLinesOfText, MultiStringWithCustomFacts multiString)
+        {
+            var listOfStrings = multiString.Lines;
+            if(stringTreeWithLinesOfText.Value != null)
+            {
+                listOfStrings.Add(stringTreeWithLinesOfText.Value);
+            }
+            if(stringTreeWithLinesOfText.Children != null)
+            {
+                foreach(var ch in stringTreeWithLinesOfText.Children)
+                {
+                    if (Tag.CONTINUATION.Desc().Equals(ch.Tag))
+                    {
+                        if(ch.Value == null)
+                        {
+                            listOfStrings.Add(string.Empty);
+                        }
+                        else
+                        {
+                            listOfStrings.Add(ch.Value);
+                        }
+                    } 
+                    else if (Tag.CONCATENATION.Desc().Equals(ch.Tag))
+                    {
+                        // If there's no value to concatenate, ignore it
+                        if(ch.Value != null)
+                        {
+                            if (!listOfStrings.Any())
+                            {
+                                listOfStrings.Add(ch.Value);
+                            }
+                            else
+                            {
+                                var i = listOfStrings.Count - 1;
+                                listOfStrings[i] = listOfStrings[i] + ch.Value;
+                            }
+                        }
+                    } else
+                    {
+                        UnknownTag(ch, multiString);
+                    }
+                }
+            }
+        }
+
 
         /// <summary>
         /// Helper method to take a string tree and all its children and load them into a StringWithCustomFacts object

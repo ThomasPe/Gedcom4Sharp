@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Gedcom4Sharp.Models.Gedcom.Base
+﻿namespace Gedcom4Sharp.Models.Gedcom.Base
 {
     public abstract class AbstractNameVariation : AbstractElement
     {

@@ -15,5 +15,10 @@ namespace Gedcom4Sharp.Models.Gedcom
         {
             Value = value;
         }
+
+        public override string ToString()
+        {
+            return Value;
+        }
     }
 }

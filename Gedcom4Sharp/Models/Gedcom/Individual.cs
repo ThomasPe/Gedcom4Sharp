@@ -89,7 +89,7 @@ namespace Gedcom4Sharp.Models.Gedcom
         /// <summary>
         /// The record ID number
         /// </summary>
-        public StringWithCustomFacts recIdNumber { get; set; }
+        public StringWithCustomFacts RecIdNumber { get; set; }
 
         /// <summary>
         /// The restriction notice (if any) for this individual

@@ -5,6 +5,6 @@ namespace Gedcom4Sharp.Models.Gedcom
 {
     public class IndividualAttribute : AbstractEvent
     {
-        public IndividualEventType Type { get; set; }
+        public IndividualAttributeType Type { get; set; }
     }
 }

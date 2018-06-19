@@ -7,9 +7,14 @@ namespace Gedcom4Sharp.Parser
 {
     internal class IndividualEventParser : AbstractEventParser<IndividualEvent>
     {
-        public IndividualEventParser(GedcomParser gedcomParser, StringTree ch, IndividualEvent individualEvent) : base (gedcomParser, ch, individualEvent)
+        /// <summary>
+        /// a reference to the root GedcomParser
+        /// </summary>
+        /// <param name="gedcomParser">a reference to the root GedcomParser</param>
+        /// <param name="stringTree">StringTree to be parsed</param>
+        /// <param name="loadInto">the object we are loading data into</param>
+        public IndividualEventParser(GedcomParser gedcomParser, StringTree stringTree, IndividualEvent loadInto) : base (gedcomParser, stringTree, loadInto)
         {
-        
         }
 
         public override void Parse()
@@ -114,10 +119,30 @@ namespace Gedcom4Sharp.Parser
                         }
                         else
                         {
-                            // _loadInto.Description = new StringWithCustomFacts()
+                            _loadInto.Description.Value += ch.Value;
                         }
                     }
-                    // TODO Finish
+                    else if (Tag.CONTINUATION.Desc().Equals(ch.Tag))
+                    {
+                        if (_loadInto.Description == null)
+                        {
+                            _loadInto.Description = ParseStringWithCustomFacts(ch);
+                        }
+                        else
+                        {
+                            _loadInto.Description.Value += ch.Value;
+                        }
+                    }
+                    else if (Tag.FAMILY_WHERE_CHILD.Desc().Equals(ch.Tag))
+                    {
+                        var fc = new FamilyChild();
+                        _loadInto.Family = fc;
+                        new FamilyChildParser(_gedcomParser, ch, fc).Parse();
+                    }
+                    else
+                    {
+                        UnknownTag(ch, _loadInto);
+                    }
                 }
                 
             }

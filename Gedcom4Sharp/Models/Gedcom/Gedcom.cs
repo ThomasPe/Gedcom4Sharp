@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using Gedcom4Sharp.Models.Gedcom.Base;
+using System.Collections.Generic;
 
 namespace Gedcom4Sharp.Models.Gedcom
 {
     /// <summary>
     ///  Main (root) class for an entire GEDCOM file.
     /// </summary>
-    public class Gedcom
+    public class Gedcom : AbstractElement
     {
         /// <summary>
         /// All the families in the GEDCOM file. The map is keyed on family cross-reference numbers, and the families themselves are in the value set.

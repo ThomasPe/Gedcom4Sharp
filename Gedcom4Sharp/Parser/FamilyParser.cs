@@ -8,7 +8,12 @@ namespace Gedcom4Sharp.Parser
 {
     internal class FamilyParser : AbstractParser<Family>
     {
-
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="gedcomParser">a reference to the root GedcomParser</param>
+        /// <param name="stringTree">StringTree to be parsed</param>
+        /// <param name="loadInto">the object we are loading data into</param>
         public FamilyParser(GedcomParser gedcomParser, StringTree stringTree, Family loadInto) : base(gedcomParser, stringTree, loadInto)
         {
         }
@@ -109,6 +114,19 @@ namespace Gedcom4Sharp.Parser
                         var ldsss = new LdsSpouseSealing();
                         _loadInto.LdsSpouseSealings.Add(ldsss);
                         new LdsSpouseSealingParser(_gedcomParser, ch, ldsss).Parse();
+                    }
+                    else if (Tag.SUBMITTER.Desc().Equals(ch.Tag))
+                    {
+                        _loadInto.Submitters.Add(new SubmitterReference(GetSubmitter(ch.Value)));
+                    }
+                    else if (Tag.REFERENCE.Desc().Equals(ch.Tag))
+                    {
+                        var u = new UserReference();
+                        new UserReferenceParser(_gedcomParser, ch, u).Parse();
+                    }
+                    else
+                    {
+                        UnknownTag(ch, _loadInto);
                     }
                 }
             }

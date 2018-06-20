@@ -146,7 +146,7 @@ namespace Gedcom4Sharp.Parser
         {
             if (Tag.HEADER.Desc().Equals(rootLevelItem.Tag))
             {
-                if(Gedcom.Header == null)
+                if (Gedcom.Header == null)
                 {
                     Gedcom.Header = new Header();
                 }
@@ -166,11 +166,11 @@ namespace Gedcom4Sharp.Parser
             {
                 var s = new Submission(rootLevelItem.Xref);
                 Gedcom.Submission = s;
-                if(Gedcom.Header == null)
+                if (Gedcom.Header == null)
                 {
                     Gedcom.Header = new Header();
                 }
-                if(Gedcom.Header.SubmissionReference == null)
+                if (Gedcom.Header.SubmissionReference == null)
                 {
                     /**
                      * The GEDCOM spec puts a cross reference to the root-level SUBN element in the HEAD structure. Now that we have a
@@ -189,6 +189,29 @@ namespace Gedcom4Sharp.Parser
             {
                 var f = GetFamily(rootLevelItem.Xref);
                 new FamilyParser(this, rootLevelItem, f);
+            }
+            else if (Tag.TRAILER.Desc().Equals(rootLevelItem.Tag))
+            {
+                Gedcom.Trailer = new Trailer();
+            }
+            else if (Tag.SOURCE.Desc().Equals(rootLevelItem.Tag))
+            {
+                var s = GetSource(rootLevelItem.Tag);
+                new SourceParser(this, rootLevelItem, s).Parse();
+            }
+            else if (Tag.REPOSITORY.Desc().Equals(rootLevelItem.Tag))
+            {
+                var r = GetRepository(rootLevelItem.Xref);
+                new RepositoryParser(this, rootLevelItem, r).Parse();
+            }
+            else if (Tag.OBJECT_MULTIMEDIA.Desc().Equals(rootLevelItem.Tag))
+            {
+                var multimedia = GetMultimedia(rootLevelItem.Xref);
+                new MultimediaParser(this, rootLevelItem, multimedia).Parse();
+            }
+            else
+            {
+                UnknownTag(rootLevelItem, Gedcom);
             }
             // TODO Finish Parser
         }

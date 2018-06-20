@@ -43,5 +43,10 @@ namespace Gedcom4Sharp.Models.Gedcom
         /// The temple code for this submission
         /// </summary>
         public StringWithCustomFacts TempleCode { get; set; }
+
+        public Submission(string xref)
+        {
+            Xref = xref;
+        }
     }
 }

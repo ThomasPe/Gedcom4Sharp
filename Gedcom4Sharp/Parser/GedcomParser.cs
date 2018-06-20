@@ -162,7 +162,34 @@ namespace Gedcom4Sharp.Parser
                 var i = GetIndividual(rootLevelItem.Xref);
                 new IndividualParser(this, rootLevelItem, i).Parse();
             }
-
+            else if (Tag.SUBMISSION.Desc().Equals(rootLevelItem.Tag))
+            {
+                var s = new Submission(rootLevelItem.Xref);
+                Gedcom.Submission = s;
+                if(Gedcom.Header == null)
+                {
+                    Gedcom.Header = new Header();
+                }
+                if(Gedcom.Header.SubmissionReference == null)
+                {
+                    /**
+                     * The GEDCOM spec puts a cross reference to the root-level SUBN element in the HEAD structure. Now that we have a
+                     * submission object, represent that cross reference in the header object
+                     */
+                    Gedcom.Header.SubmissionReference = new SubmissionReference(s);
+                }
+                new SubmissionParser(this, rootLevelItem, s).Parse();
+            }
+            else if (Tag.NOTE.Desc().Equals(rootLevelItem.Tag))
+            {
+                var nr = GetNoteRecord(rootLevelItem.Xref);
+                new NoteRecordParser(this, rootLevelItem, nr).Parse();
+            }
+            else if (Tag.FAMILY.Desc().Equals(rootLevelItem.Tag))
+            {
+                var f = GetFamily(rootLevelItem.Xref);
+                new FamilyParser(this, rootLevelItem, f);
+            }
             // TODO Finish Parser
         }
 

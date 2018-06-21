@@ -52,10 +52,13 @@
     <Compile Include="Parser\LinePieces.Tests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\TortureFiles\EnglishTudorHouse.ged" />
+    <None Include="Assets\TortureFiles\EnglishTudorHouse.ged">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <Compile Include="Utility\ArrayExtensions.Tests.cs" />
     <Compile Include="Utility\EnumExtensions.Tests.cs" />
+    <Compile Include="Parser\GedcomParser.Tests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Gedcom4Sharp\Gedcom4Sharp.csproj">

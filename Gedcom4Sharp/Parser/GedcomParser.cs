@@ -86,7 +86,10 @@ namespace Gedcom4Sharp.Parser
         /// </summary>
         public bool IsInsideCustomTag { get; set; }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="filePath"></param>
         public void Load(string filePath)
         {
             Gedcom = new Gedcom();
@@ -102,7 +105,7 @@ namespace Gedcom4Sharp.Parser
                 {
                     if(line[0] == '0')
                     {
-                        // parseAndLoadPreviousStringTree();
+                        ParseAndLoadPreviousStringTree();
                     }
                     LineNum++;
                     _stringTreeBuilder.AppendLine(line);
@@ -126,6 +129,9 @@ namespace Gedcom4Sharp.Parser
 
         }
 
+        /// <summary>
+        /// Parse the {@link StringTreeBuilder}'s string tree in memory, load it into the object model, then discard that string tree buffer
+        /// </summary>
         private void ParseAndLoadPreviousStringTree()
         {
             var tree = _stringTreeBuilder.WrapperNode;

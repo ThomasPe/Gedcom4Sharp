@@ -56,7 +56,7 @@ namespace Gedcom4Sharp.Models.Gedcom
         /// A map of the submitters in the GEDCOM file. The map is keyed on submitter cross-reference numbers, and the submitters
         /// themselves are in the value set
         /// </summary>
-        public Dictionary<string, Submitter> Submitters { get; set; }
+        public Dictionary<string, Submitter> Submitters { get; set; } = new Dictionary<string, Submitter>();
 
         /// <summary>
         /// The trailer of the file

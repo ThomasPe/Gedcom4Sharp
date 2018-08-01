@@ -108,7 +108,7 @@ namespace Gedcom4Sharp.Parser
                         _loadInto.UserReferences.Add(u);
                         new UserReferenceParser(_gedcomParser, ch, u).Parse();
                     }
-                    else if (Tag.RECORD_ID_NUMBER.Desc().Equals(ch))
+                    else if (Tag.RECORD_ID_NUMBER.Desc().Equals(ch.Tag))
                     {
                         _loadInto.RecIdNumber = ParseStringWithCustomFacts(ch);
                     }

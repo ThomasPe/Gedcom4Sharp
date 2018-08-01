@@ -41,15 +41,15 @@ namespace Gedcom4Sharp.Parser
                     {
                         _loadInto.SurnamePrefix = ParseStringWithCustomFacts(ch);
                     }
-                    else if (Tag.SURNAME.Desc().Equals(ch))
+                    else if (Tag.SURNAME.Desc().Equals(ch.Tag))
                     {
                         _loadInto.Surname = ParseStringWithCustomFacts(ch);
                     }
-                    else if (Tag.NAME_SUFFIX.Desc().Equals(ch))
+                    else if (Tag.NAME_SUFFIX.Desc().Equals(ch.Tag))
                     {
                         _loadInto.Suffix = ParseStringWithCustomFacts(ch);
                     }
-                    else if (Tag.SOURCE.Desc().Equals(ch))
+                    else if (Tag.SOURCE.Desc().Equals(ch.Tag))
                     {
                         new CitationListParser(_gedcomParser, ch, _loadInto.Citations);
                     }

@@ -30,7 +30,7 @@ namespace Gedcom4Sharp.Parser.Base
         public AbstractParser(GedcomParser gedcomParser, StringTree stringTree, T loadInto)
         {
             _stringTree = stringTree;
-            _gedcomParser = gedcomParser;
+            _gedcomParser = gedcomParser == null && this is GedcomParser ? this as GedcomParser : gedcomParser;
             _loadInto = loadInto;
         }
 

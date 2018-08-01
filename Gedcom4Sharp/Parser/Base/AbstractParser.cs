@@ -41,7 +41,7 @@ namespace Gedcom4Sharp.Parser.Base
         protected bool G55()
         {
             var versionNumber = _gedcomParser.Gedcom?.Header?.GedcomVersion?.VersionNumber?.Value;
-            return versionNumber != null & versionNumber.Equals(SupportedVersion.V5_5);
+            return versionNumber != null && versionNumber.Equals(SupportedVersion.V5_5);
         }
 
         /// <summary>

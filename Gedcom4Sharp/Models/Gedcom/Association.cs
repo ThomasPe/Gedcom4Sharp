@@ -7,7 +7,7 @@ namespace Gedcom4Sharp.Models.Gedcom.Models
     {
         public StringWithCustomFacts AssociatedEntityType { get; set; }
         public string AssociatedEntityXref { get; set; }
-        public List<AbstractCitation> Citations { get; set; }
+        public List<AbstractCitation> Citations { get; set; } = new List<AbstractCitation>();
         public StringWithCustomFacts Relationship { get; set; }
     }
 }

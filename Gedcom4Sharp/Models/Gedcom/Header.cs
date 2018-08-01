@@ -15,7 +15,7 @@ namespace Gedcom4Sharp.Models.Gedcom
         /// <summary>
         /// Copyright information for the GEDCOM file.
         /// </summary>
-        public List<string> CopyrightData { get; set; }
+        public List<string> CopyrightData { get; set; } = new List<string>();
 
         /// <summary>
         /// The date of the GEDCOM file

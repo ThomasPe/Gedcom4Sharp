@@ -6,12 +6,12 @@ namespace Gedcom4Sharp.Models.Gedcom.Base
 {
     public abstract class AbstractEvent : AbstractAddressableElement, HasCitations
     {
-        public List<AbstractCitation> Citations { get; set; }
+        public List<AbstractCitation> Citations { get; set; } = new List<AbstractCitation>();
         public StringWithCustomFacts Age { get; set; }
         public StringWithCustomFacts Cause { get; set; }
         public StringWithCustomFacts Date { get; set; }
         public StringWithCustomFacts Description { get; set; }
-        public List<MultimediaReference> Multimedia { get; set; }
+        public List<MultimediaReference> Multimedia { get; set; } = new List<MultimediaReference>();
         public Place Place { get; set; }
         public StringWithCustomFacts ReligiousAffiliation { get; set; }
         public StringWithCustomFacts RespAgency { get; set; }

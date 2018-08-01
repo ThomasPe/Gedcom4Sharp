@@ -28,7 +28,7 @@ namespace Gedcom4Sharp.Models.Gedcom
         /// <summary>
         /// The user references for this submitter
         /// </summary>
-        public List<UserReference> UserReferences { get; set; }
+        public List<UserReference> UserReferences { get; set; } = new List<UserReference>();
 
     }
 }

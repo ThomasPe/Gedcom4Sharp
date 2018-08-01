@@ -12,7 +12,7 @@ namespace Gedcom4Sharp.Models.Gedcom
         public StringWithCustomFacts Addr3 { get; set; }
         public StringWithCustomFacts City { get; set; }
         public StringWithCustomFacts Country { get; set; }
-        public List<string> Lines { get; set; }
+        public List<string> Lines { get; set; } = new List<string>();
         public StringWithCustomFacts PostalCode { get; set; }
         public StringWithCustomFacts StateProvince { get; set; }
     }

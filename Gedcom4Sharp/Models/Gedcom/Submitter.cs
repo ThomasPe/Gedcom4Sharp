@@ -9,12 +9,12 @@ namespace Gedcom4Sharp.Models.Gedcom
     {
         public string Xref { get; set; }
         public ChangeDate ChangeDate { get; set; }
-        public List<StringWithCustomFacts> LanguagePref { get; set; }
-        public List<MultimediaReference> Multimedia { get; set; }
-        public StringWithCustomFacts Name { get; set; }
-        public StringWithCustomFacts RecIdNumber { get; set; }
-        public StringWithCustomFacts RegFileNumber { get; set; }
-        public List<UserReference> UserReferences { get; set; }
+        public List<StringWithCustomFacts> LanguagePref { get; set; } = new List<StringWithCustomFacts>();
+        public List<MultimediaReference> Multimedia { get; set; } = new List<MultimediaReference>();
+        public StringWithCustomFacts Name { get; set; } = new StringWithCustomFacts();
+        public StringWithCustomFacts RecIdNumber { get; set; } = new StringWithCustomFacts();
+        public StringWithCustomFacts RegFileNumber { get; set; } = new StringWithCustomFacts();
+        public List<UserReference> UserReferences { get; set; } = new List<UserReference>();
 
         public Submitter()
         {

@@ -5,7 +5,7 @@ namespace Gedcom4Sharp.Models.Gedcom
 {
     public class RepositoryCitation : AbstractNotesElement
     {
-        public List<SourceCallNumber> CallNumbers { get; set; }
+        public List<SourceCallNumber> CallNumbers { get; set; } = new List<SourceCallNumber>();
         public string RepositoryXref { get; set; }
     }
 }

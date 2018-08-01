@@ -8,7 +8,7 @@ namespace Gedcom4Sharp.Models.Gedcom
     public class CustomFact : AbstractNotesElement, HasCitations, HasXref
     {
         public string Xref { get; set; }
-        public List<AbstractCitation> Citations { get; set; }
+        public List<AbstractCitation> Citations { get; set; } = new List<AbstractCitation>();
         public StringWithCustomFacts Date { get; set; }
         public StringWithCustomFacts Description { get; set; }
         public Place Place { get; set; }

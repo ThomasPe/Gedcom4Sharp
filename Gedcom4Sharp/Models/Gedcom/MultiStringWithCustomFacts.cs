@@ -5,6 +5,6 @@ namespace Gedcom4Sharp.Models.Gedcom
 {
     public class MultiStringWithCustomFacts : AbstractElement
     {
-        public List<string> Lines { get; set; }
+        public List<string> Lines { get; set; } = new List<string>();
     }
 }

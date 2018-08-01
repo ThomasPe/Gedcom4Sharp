@@ -7,13 +7,13 @@ namespace Gedcom4Sharp.Models.Gedcom
     {
         public List<AbstractCitation> Citations { get; set; }
         public string Xref { get; set; }
-        public List<string> Blob { get; set; }
+        public List<string> Blob { get; set; } = new List<string>();
         public ChangeDate ChangeDate { get; set; }
         public MultimediaReference ContinuedObject { get; set; }
         public StringWithCustomFacts EmbeddedMediaFormat { get; set; }
         public StringWithCustomFacts EmbeddedTitle { get; set; }
-        public List<FileReference> FileReferences { get; set; }
+        public List<FileReference> FileReferences { get; set; } = new List<FileReference>();
         public StringWithCustomFacts RecIdNumber { get; set; }
-        public List<UserReference> UserReferences { get; set; }
+        public List<UserReference> UserReferences { get; set; } = new List<UserReference>();
     }
 }

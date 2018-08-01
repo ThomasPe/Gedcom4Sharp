@@ -8,7 +8,7 @@ namespace Gedcom4Sharp.Models.Gedcom
         /// <summary>
         /// The citations for this object
         /// </summary>
-        public List<AbstractCitation> Citations { get; set; }
+        public List<AbstractCitation> Citations { get; set; } = new List<AbstractCitation>();
 
         /// <summary>
         /// The xref for this submitter
@@ -28,12 +28,12 @@ namespace Gedcom4Sharp.Models.Gedcom
         /// <summary>
         /// A list of the children in the family
         /// </summary>
-        public List<IndividualReference> Children { get; set; }
+        public List<IndividualReference> Children { get; set; } = new List<IndividualReference>();
 
         /// <summary>
         /// All the family events
         /// </summary>
-        public List<FamilyEvent> Events { get; set; }
+        public List<FamilyEvent> Events { get; set; } = new List<FamilyEvent>();
 
         /// <summary>
         /// The husband in the family
@@ -43,12 +43,12 @@ namespace Gedcom4Sharp.Models.Gedcom
         /// <summary>
         /// The LDS Spouse Sealings for this family
         /// </summary>
-        public List<LdsSpouseSealing> LdsSpouseSealings { get; set; }
+        public List<LdsSpouseSealing> LdsSpouseSealings { get; set; } = new List<LdsSpouseSealing>();
 
         /// <summary>
         /// Multimedia links for this source citation
         /// </summary>
-        public List<MultimediaReference> Multimedia { get; set; }
+        public List<MultimediaReference> Multimedia { get; set; } = new List<MultimediaReference>();
 
         /// <summary>
         /// The number of children
@@ -69,12 +69,12 @@ namespace Gedcom4Sharp.Models.Gedcom
         /// <summary>
         /// A list of the submitters for this family
         /// </summary>
-        public List<SubmitterReference> Submitters { get; set; }
+        public List<SubmitterReference> Submitters { get; set; } = new List<SubmitterReference>();
 
         /// <summary>
         /// The user references for this submitter
         /// </summary>
-        public List<UserReference> UserReferences { get; set; }
+        public List<UserReference> UserReferences { get; set; } = new List<UserReference>();
 
         /// <summary>
         /// The wife in the family

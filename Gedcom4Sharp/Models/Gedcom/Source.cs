@@ -23,7 +23,7 @@ namespace Gedcom4Sharp.Models.Gedcom
         /// <summary>
         /// Multimedia links for this source citation
         /// </summary>
-        public List<MultimediaReference> Multimedia { get; set; }
+        public List<MultimediaReference> Multimedia { get; set; } = new List<MultimediaReference>();
 
         /// <summary>
         /// The originators/authors
@@ -63,6 +63,6 @@ namespace Gedcom4Sharp.Models.Gedcom
         /// <summary>
         /// The user references for this submitter
         /// </summary>
-        public List<UserReference> UserReferences { get; set; }
+        public List<UserReference> UserReferences { get; set; } = new List<UserReference>();
     }
 }

@@ -121,7 +121,7 @@ namespace Gedcom4Sharp.Parser
                 _treeForCurrentLine.Parent = addTo;
                 lastNodeAtLevel[_treeForCurrentLine.Level] = _treeForCurrentLine;
             }
-            lastNodeAtLevel.Fill(_treeForCurrentLine.Level, 99, null);
+            lastNodeAtLevel.Fill(_treeForCurrentLine.Level + 1, 99, null);
         }
 
         /// <summary>

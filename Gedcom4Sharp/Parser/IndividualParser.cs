@@ -80,7 +80,7 @@ namespace Gedcom4Sharp.Parser
                         _loadInto.Attributes.Add(a);
                         new IndividualAttributeParser(_gedcomParser, ch, a).Parse();
                     }
-                    else if (EnumExtensions.TryParseDescriptionToEnum<LdsIndividualOrdinanceType>(ch.Tag, out LdsIndividualOrdinanceType l))
+                    else if (EnumExtensions.TryParseDescriptionToEnum(ch.Tag, out LdsIndividualOrdinanceType l))
                     {
                         var ord = new LdsIndividualOrdinance();
                         _loadInto.LdsIndividualOrdinances.Add(ord);

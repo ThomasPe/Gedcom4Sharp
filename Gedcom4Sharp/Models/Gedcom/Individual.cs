@@ -11,7 +11,7 @@ namespace Gedcom4Sharp.Models.Gedcom
         /// <summary>
         /// The citations for this object
         /// </summary>
-        public List<AbstractCitation> Citations { get; set; }
+        public List<AbstractCitation> Citations { get; set; } = new List<AbstractCitation>();
 
         /// <summary>
         /// The xref for this submitter
@@ -21,12 +21,12 @@ namespace Gedcom4Sharp.Models.Gedcom
         /// <summary>
         /// Aliases for the current individual.
         /// </summary>
-        public List<StringWithCustomFacts> Aliases { get; set; }
+        public List<StringWithCustomFacts> Aliases { get; set; } = new List<StringWithCustomFacts>();
 
         /// <summary>
         /// A list of submitter(s) who are interested in the ancestry of this individual.
         /// </summary>
-        public List<Submitter> AncestorInterest { get; set; }
+        public List<Submitter> AncestorInterest { get; set; } = new List<Submitter>();
 
         /// <summary>
         /// The Ancestral File Number of this individual.
@@ -36,12 +36,12 @@ namespace Gedcom4Sharp.Models.Gedcom
         /// <summary>
         /// A list of associations to which this individual belongs/belonged.
         /// </summary>
-        public List<Association> Associations { get; set; }
+        public List<Association> Associations { get; set; } = new List<Association>();
 
         /// <summary>
         /// A list of individual attributes about this individual.
         /// </summary>
-        public List<IndividualAttribute> Attributes { get; set; }
+        public List<IndividualAttribute> Attributes { get; set; } = new List<IndividualAttribute>();
 
         /// <summary>
         /// The change date for this individual
@@ -51,35 +51,35 @@ namespace Gedcom4Sharp.Models.Gedcom
         /// <summary>
         /// A list of submitters who are interested in the descendants of this individual.
         /// </summary>
-        public List<Submitter> DescendantInterest { get; set; }
+        public List<Submitter> DescendantInterest { get; set; } = new List<Submitter>();
 
         /// <summary>
         /// A list of events for this individual.
         /// </summary>
-        public List<IndividualEvent> Events { get; set; }
+        public List<IndividualEvent> Events { get; set; } = new List<IndividualEvent>();
 
         /// <summary>
         /// A list of families to which this individual was a child
         /// </summary>
-        public List<FamilyChild> FamiliesWhereChild { get; set; }
+        public List<FamilyChild> FamiliesWhereChild { get; set; } = new List<FamilyChild>();
         /// <summary>
         /// A list of families to which this individual was either the husband or wife
         /// </summary>
-        public List<FamilySpouse> FamiliesWhereSpouse { get; set; }
+        public List<FamilySpouse> FamiliesWhereSpouse { get; set; } = new List<FamilySpouse>();
         /// <summary>
         /// A list of LDS individual ordinances for this individual
         /// </summary>
-        public List<LdsIndividualOrdinance> LdsIndividualOrdinances { get; set; }
+        public List<LdsIndividualOrdinance> LdsIndividualOrdinances { get; set; } = new List<LdsIndividualOrdinance>();
 
         /// <summary>
         /// Multimedia links for this source citation
         /// </summary>
-        public List<MultimediaReference> Multimedia { get; set; }
+        public List<MultimediaReference> Multimedia { get; set; } = new List<MultimediaReference>();
 
         /// <summary>
         /// A list of names for this individual
         /// </summary>
-        public List<PersonalName> Names { get; set; }
+        public List<PersonalName> Names { get; set; } = new List<PersonalName>();
 
         /// <summary>
         /// The permanent record file number for this individual
@@ -104,11 +104,11 @@ namespace Gedcom4Sharp.Models.Gedcom
         /// <summary>
         /// A list of submitter(s) of this individual
         /// </summary>
-        public List<Submitter> Submitters { get; set; }
+        public List<Submitter> Submitters { get; set; } = new List<Submitter>();
 
         /// <summary>
         /// The user references for this submitter
         /// </summary>
-        public List<UserReference> UserReferences { get; set; }
+        public List<UserReference> UserReferences { get; set; } = new List<UserReference>();
     }
 }

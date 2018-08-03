@@ -194,7 +194,7 @@ namespace Gedcom4Sharp.Parser
             else if (Tag.FAMILY.Desc().Equals(rootLevelItem.Tag))
             {
                 var f = GetFamily(rootLevelItem.Xref);
-                new FamilyParser(this, rootLevelItem, f);
+                new FamilyParser(this, rootLevelItem, f).Parse();
             }
             else if (Tag.TRAILER.Desc().Equals(rootLevelItem.Tag))
             {

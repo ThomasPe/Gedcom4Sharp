@@ -1,21 +1,51 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.ComponentModel;
 
 namespace Gedcom4Sharp.Models.Gedcom.Enums
 {
     public enum FamilyEventType
     {
-        Annulment,
-        Census,
-        Divorce,
-        Divorce_filed,
-        Engagement,
-        Event,
-        Marriage,
-        Marriage_Banner,
-        Marriage_Contract,
-        Marriage_License,
-        Marriage_Settlement
+        /** Annulment */
+        [Description("ANUL")]
+        ANNULMENT,
+
+        /** Census */
+        [Description("CENS")]
+        CENSUS,
+
+        /** Divorce */
+        [Description("DIV")]
+        DIVORCE,
+
+        /** Divorce filed */
+        [Description("DIVF")]
+        DIVORCE_FILED,
+
+        /** Engagement */
+        [Description("ENGA")]
+        ENGAGEMENT,
+
+        /** General event */
+        [Description("EVEN")]
+        EVENT,
+
+        /** Marriage */
+        [Description("MARR")]
+        MARRIAGE,
+
+        /** Marriage Banner */
+        [Description("MARB")]
+        MARRIAGE_BANNER,
+
+        /** Marriage Contract */
+        [Description("MARC")]
+        MARRIAGE_CONTRACT,
+
+        /** Marriage License */
+        [Description("MARL")]
+        MARRIAGE_LICENSE,
+
+        /** Marriage Settlement */
+        [Description("MARS")]
+        MARRIAGE_SETTLEMENT
     }
 }

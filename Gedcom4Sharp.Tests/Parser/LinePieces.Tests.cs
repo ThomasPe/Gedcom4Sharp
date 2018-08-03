@@ -2,7 +2,7 @@
 using Gedcom4Sharp.Parser;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Gedcom4Sharp.Tests
+namespace Gedcom4Sharp.Tests.Parser
 {
     [TestClass]
     public class LinePiecesTests
@@ -47,6 +47,28 @@ namespace Gedcom4Sharp.Tests
             Assert.IsNotNull(lp);
             Assert.AreEqual(4, lp.Level);
             Assert.AreEqual("@XREF@", lp.Id);
+            Assert.AreEqual("TAGG", lp.Tag);
+            Assert.AreEqual("additional stuff", lp.Remainder);
+        }
+
+        [TestMethod]
+        public void LinePieces_PositiveNothingAfterTag()
+        {
+            var lp = new LinePieces("4 TAGG", 5);
+            Assert.IsNotNull(lp);
+            Assert.AreEqual(4, lp.Level);
+            Assert.IsTrue(String.IsNullOrEmpty(lp.Id));
+            Assert.AreEqual("TAGG", lp.Tag);
+            Assert.IsTrue(String.IsNullOrEmpty(lp.Remainder));
+        }
+
+        [TestMethod]
+        public void LinePieces_PositiveNoXref()
+        {
+            var lp = new LinePieces("4 TAGG additional stuff", 5);
+            Assert.IsNotNull(lp);
+            Assert.AreEqual(4, lp.Level);
+            Assert.IsTrue(String.IsNullOrEmpty(lp.Id));
             Assert.AreEqual("TAGG", lp.Tag);
             Assert.AreEqual("additional stuff", lp.Remainder);
         }

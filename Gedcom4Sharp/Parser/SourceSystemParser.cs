@@ -32,7 +32,9 @@ namespace Gedcom4Sharp.Parser
                         _loadInto.Corporation = new Corporation();
                         new CorporationParser(_gedcomParser, ch, _loadInto.Corporation).Parse();
                     }
-                    else if (Tag.DATA_FOR_CITATION.Desc().Equals(ch.Tag))
+                    // TODO
+                    //else if (Tag.DATA_FOR_CITATION.Desc().Equals(ch.Tag))
+                    else if (Tag.DATA_FOR_SOURCE.Desc().Equals(ch.Tag))
                     {
                         _loadInto.SourceData = new HeaderSourceData();
                         new HeaderSourceDataParser(_gedcomParser, ch, _loadInto.SourceData).Parse();

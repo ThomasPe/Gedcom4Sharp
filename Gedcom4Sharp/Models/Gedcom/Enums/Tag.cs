@@ -107,9 +107,10 @@ namespace Gedcom4Sharp.Models.Gedcom.Enums
         [Description("CTRY")]
         COUNTRY,
 
+        /** TODO: How to handle duplicate DATA */
         /** Data for a citation */
-        [Description("DATA")]
-        DATA_FOR_CITATION,
+        //[Description("DATA")]
+        //DATA_FOR_CITATION,
 
         /** Data for a source */
         [Description("DATA")]

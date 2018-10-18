@@ -54,7 +54,6 @@ namespace Gedcom4Sharp.Utility.Extensions
         public static bool TryParseDescriptionToEnum<T>(string description, out T obj)
         {
             var success = true;
-            obj = default(T);
             try
             {
                 obj = ParseDescriptionToEnum<T>(description);
@@ -62,6 +61,7 @@ namespace Gedcom4Sharp.Utility.Extensions
             catch (Exception ex)
             {
                 success = false;
+                obj = default(T);
             }
             return success;
         }

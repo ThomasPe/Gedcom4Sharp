@@ -26,7 +26,7 @@ namespace Gedcom4Sharp.Parser
                 {
                     if (Tag.HUSBAND.Desc().Equals(ch.Tag))
                     {
-                        var husband = new IndividualReference(GetIndividual(ch.Tag));
+                        var husband = new IndividualReference(GetIndividual(ch.Value));
                         _loadInto.Husband = husband;
                         if(ch.Children != null)
                         {
@@ -40,7 +40,7 @@ namespace Gedcom4Sharp.Parser
                     }
                     else if (Tag.WIFE.Desc().Equals(ch.Tag))
                     {
-                        var wife = new IndividualReference(GetIndividual(ch.Tag));
+                        var wife = new IndividualReference(GetIndividual(ch.Value));
                         _loadInto.Wife = wife;
                         if (ch.Children != null)
                         {
@@ -54,7 +54,7 @@ namespace Gedcom4Sharp.Parser
                     }
                     else if (Tag.CHILD.Desc().Equals(ch.Tag))
                     {
-                        var child = new IndividualReference(GetIndividual(ch.Tag));
+                        var child = new IndividualReference(GetIndividual(ch.Value));
                         _loadInto.Children.Add(child);
                         if (ch.Children != null)
                         {

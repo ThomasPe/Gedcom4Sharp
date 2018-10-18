@@ -94,7 +94,7 @@ namespace Gedcom4Sharp.Tests.Parser
             var h = family.Husband.Individual;
             Assert.AreEqual("Lawrence Henry /Barnett/", h.Names.FirstOrDefault().Basic);
             var w = family.Wife.Individual;
-            Assert.Equals("Velma //", w.Names.FirstOrDefault().Basic);
+            Assert.AreEqual("Velma //", w.Names.FirstOrDefault().Basic);
         }
 
         // TODO Finish Tests

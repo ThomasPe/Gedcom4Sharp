@@ -156,7 +156,7 @@ namespace Gedcom4Sharp.Parser
                 {
                     Gedcom.Header = new Header();
                 }
-                new HeaderParser(this, rootLevelItem, Gedcom.Header);
+                new HeaderParser(this, rootLevelItem, Gedcom.Header).Parse();
             }
             else if (Tag.SUBMITTER.Desc().Equals(rootLevelItem.Tag))
             {
@@ -202,7 +202,7 @@ namespace Gedcom4Sharp.Parser
             }
             else if (Tag.SOURCE.Desc().Equals(rootLevelItem.Tag))
             {
-                var s = GetSource(rootLevelItem.Tag);
+                var s = GetSource(rootLevelItem.Xref);
                 new SourceParser(this, rootLevelItem, s).Parse();
             }
             else if (Tag.REPOSITORY.Desc().Equals(rootLevelItem.Tag))

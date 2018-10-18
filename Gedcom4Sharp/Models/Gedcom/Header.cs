@@ -61,5 +61,10 @@ namespace Gedcom4Sharp.Models.Gedcom
         /// Information about the submitter of the file
         /// </summary>
         public SubmitterReference SubmitterReference { get; set; }
+
+        /// <summary>
+        /// The time of the file
+        /// </summary>
+        public StringWithCustomFacts Time { get; set; }
     }
 }

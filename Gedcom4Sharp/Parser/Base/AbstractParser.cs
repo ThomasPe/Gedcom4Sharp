@@ -159,6 +159,7 @@ namespace Gedcom4Sharp.Parser.Base
             {
                 s = new Submitter()
                 {
+                    Name = new StringWithCustomFacts("UNSPECIFIED"),
                     Xref = xref
                 };
                 _gedcomParser.Gedcom.Submitters.Add(xref, s);

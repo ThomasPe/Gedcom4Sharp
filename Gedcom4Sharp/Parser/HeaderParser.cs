@@ -39,7 +39,7 @@ namespace Gedcom4Sharp.Parser
                         {
                             foreach (var gch in ch.Children)
                             {
-                                if (gch.Tag.Desc().Equals("TIME"))
+                                if (gch.Tag.Equals("TIME"))
                                 {
                                     _loadInto.Time = ParseStringWithCustomFacts(gch);
                                 }
@@ -59,7 +59,7 @@ namespace Gedcom4Sharp.Parser
                         {
                             foreach (var gch in ch.Children)
                             {
-                                if (gch.Tag.Desc().Equals("VERS"))
+                                if (gch.Tag.Equals("VERS"))
                                 {
                                     _loadInto.CharacterSet.VersionNum = ParseStringWithCustomFacts(gch);
                                 }

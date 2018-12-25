@@ -19,5 +19,15 @@ namespace Gedcom4Sharp.Models.Gedcom
         public StringWithCustomFacts Surname { get; set; }
         public StringWithCustomFacts SurnamePrefix { get; set; }
         public StringWithCustomFacts Type { get; set; }
+
+
+        public override string ToString()
+        {
+            if (Surname != null || GivenName != null)
+            {
+                return Surname + ", " + GivenName + (Nickname == null ? "" : " \"" + Nickname + "\"");
+            }
+            return Basic;
+        }
     }
 }

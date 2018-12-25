@@ -5,7 +5,7 @@ namespace Gedcom4Sharp.Models.Gedcom
 {
     public class Multimedia : AbstractNotesElement, HasCitations, HasXref
     {
-        public List<AbstractCitation> Citations { get; set; }
+        public List<AbstractCitation> Citations { get; set; } = new List<AbstractCitation>();
         public string Xref { get; set; }
         public List<string> Blob { get; set; } = new List<string>();
         public ChangeDate ChangeDate { get; set; }

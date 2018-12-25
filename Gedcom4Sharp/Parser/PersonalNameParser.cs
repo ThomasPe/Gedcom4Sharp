@@ -51,7 +51,7 @@ namespace Gedcom4Sharp.Parser
                     }
                     else if (Tag.SOURCE.Desc().Equals(ch.Tag))
                     {
-                        new CitationListParser(_gedcomParser, ch, _loadInto.Citations);
+                        new CitationListParser(_gedcomParser, ch, _loadInto.Citations).Parse();
                     }
                     else if (Tag.NOTE.Desc().Equals(ch.Tag))
                     {

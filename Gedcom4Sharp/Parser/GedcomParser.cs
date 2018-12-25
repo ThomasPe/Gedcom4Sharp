@@ -103,12 +103,14 @@ namespace Gedcom4Sharp.Parser
             {
                 foreach (string line in File.ReadLines(filePath))
                 {
-                    if(line[0] == '0')
+                    //line.TrimStart();
+                    var l = line.TrimStart();
+                    if(l[0] == '0')
                     {
                         ParseAndLoadPreviousStringTree();
                     }
                     LineNum++;
-                    _stringTreeBuilder.AppendLine(line);
+                    _stringTreeBuilder.AppendLine(l);
                     if (_cancelled)
                     {
                         throw new Exception("File load/parse is cancelled");

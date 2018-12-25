@@ -20,7 +20,7 @@ namespace Gedcom4Sharp.Parser
             MultimediaReference mr;
             if (ReferencesAnotherNode(_stringTree))
             {
-                m = GetMultimedia(_stringTree.Xref);
+                m = GetMultimedia(_stringTree.Value);
                 mr = new MultimediaReference(m);
                 RemainingChildrenAreCustomTags(_stringTree, mr);
             }

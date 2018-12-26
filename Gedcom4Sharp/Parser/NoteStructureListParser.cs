@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Gedcom4Sharp.Models.Gedcom;
 using Gedcom4Sharp.Models.Gedcom.Enums;
@@ -19,7 +18,7 @@ namespace Gedcom4Sharp.Parser
         public override void Parse()
         {
             var noteStructure = new NoteStructure();
-            if(_stringTree.Xref == null && ReferencesAnotherNode(_stringTree))
+            if(string.IsNullOrEmpty(_stringTree.Xref) && ReferencesAnotherNode(_stringTree))
             {
                 noteStructure.NoteReference = getNote(_stringTree.Value);
                 _loadInto.Add(noteStructure);

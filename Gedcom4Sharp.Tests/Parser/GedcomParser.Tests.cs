@@ -25,7 +25,7 @@ namespace Gedcom4Sharp.Tests.Parser
         {
             var gp = new GedcomParser();
             gp.Load(@"Assets\Samples\TGC551.ged");
-            checkTGC551LF(gp);
+            CheckTGC551LF(gp);
         }
 
         [TestMethod]
@@ -96,7 +96,7 @@ namespace Gedcom4Sharp.Tests.Parser
             var gp = new GedcomParser();
             // Different line end char seq than the other file
             gp.Load(@"Assets\Samples\TGC551LF.ged");
-            checkTGC551LF(gp);
+            CheckTGC551LF(gp);
         }
 
         /// <summary>
@@ -163,7 +163,7 @@ namespace Gedcom4Sharp.Tests.Parser
         /// The same sample file is used several times, this helper method ensures consistent assertions for all tests using the same file
         /// </summary>
         /// <param name="gp"></param>
-        private void checkTGC551LF(GedcomParser gp)
+        private void CheckTGC551LF(GedcomParser gp)
         {
             var g = gp.Gedcom;
             Assert.IsNotNull(g.Header);
@@ -268,7 +268,7 @@ namespace Gedcom4Sharp.Tests.Parser
 
             // Name 1 - Multimedia 0 - Note 0
             note = multimedia.NoteStructures[0];
-            Assert.AreEqual(1, note.NoteReference.Lines[0]);
+            Assert.AreEqual(1, note.NoteReference.Lines.Count);
             Assert.AreEqual("These are some notes of this multimedia link in the NAME structure.", note.NoteReference.Lines[0]);
 
             // Name 1 - Citation 0 - Note 0
@@ -278,16 +278,14 @@ namespace Gedcom4Sharp.Tests.Parser
             Assert.IsNotNull(note.NoteReference.Lines);
             Assert.AreEqual(3, note.NoteReference.Lines.Count);
             Assert.AreEqual(
-                @"This source citation has all fields possible in a source citation to a separate SOURCE record. 
-                Besides the link to the SOURCE record there are possible fields about this citation (e.g., PAGE, TEXT, etc.)",
+                "This source citation has all fields possible in a source citation to a separate SOURCE record. Besides the link to the SOURCE record there are possible fields about this citation (e.g., PAGE, TEXT, etc.)",
                 note.NoteReference.Lines[0]);
 
             // Name 1 - Note 0
             note = name.NoteStructures[0];
             Assert.AreEqual(3, note.Lines.Count);
             Assert.AreEqual(
-                @"This is a second personal NAME structure in a single INDIVIDUAL record which is allowed in GEDCOM. 
-                This second NAME structure has all possible fields for a NAME structure.",
+                "This is a second personal NAME structure in a single INDIVIDUAL record which is allowed in GEDCOM. This second NAME structure has all possible fields for a NAME structure.",
                 note.Lines[0]);
 
             // Note 0
@@ -297,10 +295,9 @@ namespace Gedcom4Sharp.Tests.Parser
 
             // Note 1
             note = indi.NoteStructures[1];
-            Assert.AreEqual(3, note.NoteReference.Lines.Count);
+            Assert.AreEqual(3, note.Lines.Count);
             Assert.AreEqual(
-                @"This is a second set of notes for this single individual record. 
-                It is embedded in the INDIVIDUAL record instead of being in a separate NOTE record.",
+                "This is a second set of notes for this single individual record. It is embedded in the INDIVIDUAL record instead of being in a separate NOTE record.",
                 note.Lines[0]);
 
             // Citation 0
@@ -332,7 +329,7 @@ namespace Gedcom4Sharp.Tests.Parser
 
             // Citation 1 - Note 0
             note = citWithSource.NoteStructures[0];
-            Assert.AreEqual(1, note.Lines.Count);
+            Assert.AreEqual(1, note.NoteReference.Lines.Count);
             Assert.AreEqual("This is a second source citation in this record.", note.NoteReference.Lines[0]);
 
             // Citation 2
@@ -345,8 +342,7 @@ namespace Gedcom4Sharp.Tests.Parser
             note = citWithoutSource.NoteStructures[0];
             Assert.AreEqual(1, note.NoteReference.Lines.Count);
             Assert.AreEqual(
-                @"How does software handle embedded SOURCE records on import? Such source citations are common in old GEDCOM files. 
-                More modern GEDCOM files should use source citations to SOURCE records.",
+                @"How does software handle embedded SOURCE records on import? Such source citations are common in old GEDCOM files. More modern GEDCOM files should use source citations to SOURCE records.",
                 note.NoteReference.Lines[0]);
         }
 

@@ -256,6 +256,7 @@
     <Compile Include="Utility\ArrayExtensions.Tests.cs" />
     <Compile Include="Utility\EnumExtensions.Tests.cs" />
     <Compile Include="Parser\GedcomParser.Tests.cs" />
+    <Compile Include="Parser\GedcomParser551.Tests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Gedcom4Sharp\Gedcom4Sharp.csproj">

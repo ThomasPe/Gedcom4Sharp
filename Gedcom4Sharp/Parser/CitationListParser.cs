@@ -160,7 +160,7 @@ namespace Gedcom4Sharp.Parser
                             }
                         }
                     }
-                    // TODO
+                    // TODO Handle duplicate Tag
                     // else if (Tag.DATA_FOR_CITATION.Desc().Equals(ch.Tag))
                     else if (Tag.DATA_FOR_SOURCE.Desc().Equals(ch.Tag))
                     {

@@ -183,7 +183,7 @@ namespace Gedcom4Sharp.Parser.Base
             {
                 foreach(var ch in stringTreeWithLinesOfText.Children)
                 {
-                    if (Tag.CONTINUATION.Equals(ch.Tag))
+                    if (Tag.CONTINUATION.Desc().Equals(ch.Tag))
                     {
                         if(ch.Value == null)
                         {
@@ -194,7 +194,7 @@ namespace Gedcom4Sharp.Parser.Base
                             listOfString.Add(ch.Value);
                         }
                     }
-                    else if (Tag.CONCATENATION.Equals(ch.Tag))
+                    else if (Tag.CONCATENATION.Desc().Equals(ch.Tag))
                     {
                         // If there's no value to concatenate, ignore it
                         if(ch.Value != null)

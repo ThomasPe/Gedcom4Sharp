@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.Linq;
+﻿using System.Linq;
 using Gedcom4Sharp.Models.Gedcom;
 using Gedcom4Sharp.Parser;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -153,11 +152,6 @@ namespace Gedcom4Sharp.Tests.Parser
             gp.Load(@"Assets\Samples\TGC55C.ged");
             CheckTGC55C(gp);
         }
-
-
-        // TODO Finish Tests
-        // https://github.com/frizbog/gedcom4j/blob/master/src/test/java/org/gedcom4j/parser/GedcomParserTest.java
-
 
         /// <summary>
         /// The same sample file is used several times, this helper method ensures consistent assertions for all tests using the same file

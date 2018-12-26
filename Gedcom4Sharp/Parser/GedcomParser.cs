@@ -221,7 +221,6 @@ namespace Gedcom4Sharp.Parser
             {
                 UnknownTag(rootLevelItem, Gedcom);
             }
-            // TODO Finish Parser
         }
 
         public override void Parse()

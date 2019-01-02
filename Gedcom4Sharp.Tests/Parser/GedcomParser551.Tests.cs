@@ -86,7 +86,21 @@ namespace Gedcom4Sharp.Tests.Parser
         [TestMethod]
         public void TestFax()
         {
+            var gp = new GedcomParser();
+            gp.Load(@"Assets\Samples\5.5.1 sample 3.ged");
 
+            var g = gp.Gedcom;
+            Assert.IsNotNull(g);
+            Assert.IsNotNull(g.Header);
+            Assert.IsNotNull(g.Header.SourceSystem);
+            Assert.IsNotNull(g.Header.SourceSystem.Corporation);
+            var c = g.Header.SourceSystem.Corporation;
+            Assert.AreEqual("The Church of Jesus Christ of Latter-day Saints", c.BusinessName);
+            Assert.IsNotNull(c.FaxNumbers);
+            Assert.AreEqual(1, c.FaxNumbers.Count);
+            Assert.AreEqual("800-555-1212", c.FaxNumbers[0].ToString());
+            Assert.IsNotNull(c.Emails);
+            Assert.AreEqual(0, c.Emails.Count);
         }
     }
 }

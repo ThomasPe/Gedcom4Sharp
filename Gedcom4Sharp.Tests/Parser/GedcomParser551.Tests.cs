@@ -88,8 +88,8 @@ namespace Gedcom4Sharp.Tests.Parser
         {
             var gp = new GedcomParser();
             gp.Load(@"Assets\Samples\5.5.1 sample 3.ged");
-
             var g = gp.Gedcom;
+
             Assert.IsNotNull(g);
             Assert.IsNotNull(g.Header);
             Assert.IsNotNull(g.Header.SourceSystem);
@@ -101,6 +101,35 @@ namespace Gedcom4Sharp.Tests.Parser
             Assert.AreEqual("800-555-1212", c.FaxNumbers[0].ToString());
             Assert.IsNotNull(c.Emails);
             Assert.AreEqual(0, c.Emails.Count);
+        }
+
+        /// <summary>
+        /// Test for parsing of the new "FONE" tag on a personal name in 5.5.1
+        /// </summary>
+        [TestMethod]
+        public void TestFoneName()
+        {
+            var gp = new GedcomParser();
+            gp.Load(@"Assets\Samples\5.5.1 sample 2.ged");
+            var g = gp.Gedcom;
+
+            Assert.AreEqual(0, gp.Errors.Count);
+            // There should be a warning because the file says it's 5.5 but has 5.5.1 tags in it
+            // TODO: Theres no warning as the version is read too late from the file
+            // Assert.AreNotEqual(0, gp.Warnings.Count);
+
+            var found = gp.Gedcom.Individuals.Values.Where(x => x.Names.Any(s => s.Basic.Contains("Pinter") && s.Basic.Contains("Anonymus"))).ToList();
+            Assert.AreEqual(1, found.Count);
+            var dude = found.FirstOrDefault();
+            Assert.IsNotNull(dude);
+            Assert.AreEqual(1, dude.Names.Count);
+            var pn = dude.Names.FirstOrDefault();
+            Assert.IsNotNull(pn);
+            Assert.IsNotNull(pn.Phonetic);
+            Assert.AreEqual(1, pn.Phonetic.Count);
+            var pnv = pn.Phonetic.FirstOrDefault();
+            Assert.AreEqual("Anonymus /Pinter/", pnv.Variation);
+            Assert.IsNull(pnv.VariationType);
         }
     }
 }

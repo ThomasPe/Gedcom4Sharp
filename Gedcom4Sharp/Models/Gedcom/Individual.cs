@@ -1,4 +1,5 @@
 ﻿using Gedcom4Sharp.Models.Gedcom.Base;
+using Gedcom4Sharp.Models.Gedcom.Enums;
 using Gedcom4Sharp.Models.Gedcom.Models;
 using System;
 using System.Collections.Generic;
@@ -110,5 +111,25 @@ namespace Gedcom4Sharp.Models.Gedcom
         /// The user references for this submitter
         /// </summary>
         public List<UserReference> UserReferences { get; set; } = new List<UserReference>();
+
+
+        /// <summary>
+        /// Get a list of attributes of the supplied type for this individual. For example, calling this method passing
+        /// IndividualAttributeType.OCCUPATION will return a list of all the occupations recorded for this individual.
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public List<IndividualAttribute> GetAttributesOfType(IndividualAttributeType type)
+        {
+            var result = new List<IndividualAttribute>();
+            foreach (IndividualAttribute ir in Attributes)
+            {
+                if (ir.Type == type)
+                {
+                    result.Add(ir);
+                }
+            }
+            return result;
+        }
     }
 }

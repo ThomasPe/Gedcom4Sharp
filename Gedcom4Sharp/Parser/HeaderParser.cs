@@ -87,6 +87,7 @@ namespace Gedcom4Sharp.Parser
                     else if (Tag.COPYRIGHT.Desc().Equals(ch.Tag))
                     {
                         LoadMultiLinesOfText(ch, _loadInto.CopyrightData, _loadInto);
+                        // TODO this sometimes gets called before the GEDCOM version has been read
                         if (G55() && _loadInto.CopyrightData.Count > 1)
                         {
                             _gedcomParser.Warnings.Add("GEDCOM version is 5.5, but multiple lines of copyright data were specified, which is only allowed in GEDCOM 5.5.1. Data loaded but cannot be re-written unless GEDCOM version changes.");

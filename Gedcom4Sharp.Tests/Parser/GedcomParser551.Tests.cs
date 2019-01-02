@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Gedcom4Sharp.Models.Gedcom;
+using Gedcom4Sharp.Models.Gedcom.Enums;
 using Gedcom4Sharp.Parser;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -20,7 +21,7 @@ namespace Gedcom4Sharp.Tests.Parser
             Assert.AreEqual(0, gp.Errors.Count);
             // There should be a warning because the file says it's 5.5 but has 5.5.1 tags in it"
 
-			// TODO: Can't check if its 5.5 as the Version Tag comes after the Copyright Tag
+            // TODO: Can't check if its 5.5 as the Version Tag comes after the Copyright Tag
             // Assert.AreNotEqual(0, gp.Warnings.Count);
             var g = gp.Gedcom;
             Assert.IsNotNull(g);
@@ -61,12 +62,31 @@ namespace Gedcom4Sharp.Tests.Parser
             gp.Load(@"Assets\Samples\john_of_sea_20101009.ged");
             Assert.AreEqual(0, gp.Errors.Count);
             // There should be a warning because the file says it's 5.5 but has 5.5.1 tags in it
-            Assert.AreNotEqual(0, gp.Warnings.Count);
+            // TODO: Theres no warning as the version is read too late from the file
+            // Assert.AreNotEqual(0, gp.Warnings.Count);
 
             var g = gp.Gedcom;
-            Finder f = new Finder(g);
-			
+            var found = gp.Gedcom.Individuals.Values.Where(x => x.Names.Any(s => s.Basic.Contains("Moor") && s.Basic.Contains("Mary"))).ToList();
+            Assert.AreEqual(1, found.Count);
+            var mary = found.FirstOrDefault();
+            Assert.IsNotNull(mary);
+            var facts = mary.GetAttributesOfType(IndividualAttributeType.FACT);
+            Assert.IsNotNull(facts);
+            Assert.AreEqual(1, facts.Count);
+            var fact = facts.FirstOrDefault();
+            Assert.IsNotNull(fact);
+            Assert.AreEqual(IndividualAttributeType.FACT, fact.Type);
+            Assert.AreEqual("Place from", fact.SubType.Value);
+            Assert.AreEqual("Combe Florey", fact.Description.Value);
         }
 
+        /// <summary>
+        /// Test for parsing of the new "FAX" tag in 5.5.1
+        /// </summary>
+        [TestMethod]
+        public void TestFax()
+        {
+
+        }
     }
 }

@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-using System.Linq;
-using Gedcom4Sharp.Models.Gedcom;
+﻿using Gedcom4Sharp.Models.Gedcom;
 using Gedcom4Sharp.Parser;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

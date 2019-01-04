@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Parser\CustomFactParser.Tests.cs" />
     <Compile Include="Parser\FamilyEventTypeParser.Tests.cs" />
+    <Compile Include="Parser\ParseAllSamples.Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Parser\LinePieces.Tests.cs" />
   </ItemGroup>

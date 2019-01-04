@@ -38,6 +38,7 @@ namespace Gedcom4Sharp.Parser
                     }
                     else if (Tag.ADDRESS.Desc().Equals(ch.Tag))
                     {
+                        _loadInto.Address = new Address();
                         new AddressParser(_gedcomParser, ch, _loadInto.Address).Parse();
                     }
                     else if (Tag.PHONE.Desc().Equals(ch.Tag))

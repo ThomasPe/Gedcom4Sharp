@@ -11,6 +11,6 @@ namespace Gedcom4Sharp.Models.Gedcom
         public List<AbstractNameVariation> Phonetic { get; set; } = new List<AbstractNameVariation>();
         public StringWithCustomFacts PlaceFormat { get; set; }
         public string PlaceName { get; set; }
-        public List<AbstractNameVariation> Roamanized { get; set; } = new List<AbstractNameVariation>();
+        public List<AbstractNameVariation> Romanized { get; set; } = new List<AbstractNameVariation>();
     }
 }

@@ -53,7 +53,7 @@ namespace Gedcom4Sharp.Parser
                             _gedcomParser.Warnings.Add($"GEDCOM version is 5.5 but a romanized variation was specified on a place on line {ch.LineNum} which is a GEDCOM 5.5.1 feature. Data loaded but cannot be re-written unless GEDCOM version changes.");
                         }
                         AbstractNameVariation nv = new PlaceNameVariation();
-                        _loadInto.Roamanized.Add(nv);
+                        _loadInto.Romanized.Add(nv);
                         nv.Variation = ch.Value;
                         if(ch.Children != null)
                         {

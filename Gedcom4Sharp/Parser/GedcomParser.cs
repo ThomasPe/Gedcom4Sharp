@@ -1,4 +1,5 @@
-﻿using Gedcom4Sharp.Models.Gedcom;
+﻿using Gedcom4Sharp.IO;
+using Gedcom4Sharp.Models.Gedcom;
 using Gedcom4Sharp.Models.Gedcom.Enums;
 using Gedcom4Sharp.Models.Utils;
 using Gedcom4Sharp.Parser.Base;
@@ -47,6 +48,11 @@ namespace Gedcom4Sharp.Parser
         /// Are we currently parsing somewhere inside a custom tag?
         /// </summary>
         public bool InsideCustomTag;
+
+        /// <summary>
+        /// The encoding detected by either the file bytes or gedcom CHAR tag
+        /// </summary>
+        public Encoding Encoding;
 
         /// <summary>
         /// Default Constructor
@@ -101,25 +107,10 @@ namespace Gedcom4Sharp.Parser
 
             if (File.Exists(filePath))
             {
-                foreach (string line in File.ReadLines(filePath))
+                Encoding = EncodingHelper.GetEncoding(filePath);
+                foreach (string line in File.ReadLines(filePath, Encoding))
                 {
-                    //line.TrimStart();
-                    var l = line.TrimStart();
-                    if(l[0] == '0')
-                    {
-                        ParseAndLoadPreviousStringTree();
-                    }
-                    LineNum++;
-                    _stringTreeBuilder.AppendLine(l);
-                    if (IsCancelled)
-                    {
-                        throw new Exception("File load/parse is cancelled");
-                    }
-                    // TODO Notify Parser Status
-                    //if (lineNum % parseNotificationRate == 0)
-                    //{
-                    //    notifyParseObservers(new ParseProgressEvent(this, gedcom, false, lineNum));
-                    //}
+                    ReadLine(line);
                 }
                 ParseAndLoadPreviousStringTree();
             }
@@ -130,6 +121,28 @@ namespace Gedcom4Sharp.Parser
 
 
         }
+
+        private void ReadLine(string line)
+        {
+            line = line.TrimStart();
+            if (line[0] == '0')
+            {
+                ParseAndLoadPreviousStringTree();
+            }
+            LineNum++;
+            _stringTreeBuilder.AppendLine(line);
+            if (IsCancelled)
+            {
+                throw new Exception("File load/parse is cancelled");
+            }
+            // TODO Notify Parser Status
+            //if (lineNum % parseNotificationRate == 0)
+            //{
+            //    notifyParseObservers(new ParseProgressEvent(this, gedcom, false, lineNum));
+            //}
+        }
+
+        
 
         /// <summary>
         /// Parse the {@link StringTreeBuilder}'s string tree in memory, load it into the object model, then discard that string tree buffer

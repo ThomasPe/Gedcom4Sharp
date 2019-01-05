@@ -48,6 +48,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IO\Reader\ReadEncodingTests.cs" />
     <Compile Include="Parser\CustomFactParser.Tests.cs" />
     <Compile Include="Parser\FamilyEventTypeParser.Tests.cs" />
     <Compile Include="Parser\ParseAllSamples.Tests.cs" />
@@ -252,6 +253,9 @@
     </None>
     <None Include="Assets\Samples\willis.ged">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Assets\stanglmayr.ged">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
     <Compile Include="Utility\ArrayExtensions.Tests.cs" />

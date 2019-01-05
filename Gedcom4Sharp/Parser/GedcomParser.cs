@@ -31,7 +31,7 @@ namespace Gedcom4Sharp.Parser
         /// <summary>
         /// Is the load/parse process being cancelled
         /// </summary>
-        private bool _cancelled;
+        public bool IsCancelled;
 
         /// <summary>
         ///  The StringTreeBuilder that is assisting this class
@@ -96,7 +96,7 @@ namespace Gedcom4Sharp.Parser
             LineNum = 0;
             Errors.Clear();
             Warnings.Clear();
-            _cancelled = false;
+            IsCancelled = false;
             _stringTreeBuilder = new StringTreeBuilder(this);
 
             if (File.Exists(filePath))
@@ -111,7 +111,7 @@ namespace Gedcom4Sharp.Parser
                     }
                     LineNum++;
                     _stringTreeBuilder.AppendLine(l);
-                    if (_cancelled)
+                    if (IsCancelled)
                     {
                         throw new Exception("File load/parse is cancelled");
                     }

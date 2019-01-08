@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using System.Threading.Tasks;
 using Gedcom4Sharp.IO;
 using Gedcom4Sharp.Models.Utils;
 using Gedcom4Sharp.Parser;
@@ -11,19 +12,19 @@ namespace Gedcom4Sharp.Tests.IO.Reader
     public class ReadEncodingTests
     {
         [TestMethod]
-        public void TestGetEncodingFromGedcom()
+        public async Task TestGetEncodingFromGedcom()
         {
             var gp = new GedcomParser();
-            var enc = EncodingHelper.GetEncodingFromGedcom(@"Assets\Samples\5.5.1 sample 1.ged");
+            var enc = await EncodingHelper.GetEncodingFromGedcom(@"Assets\Samples\5.5.1 sample 1.ged");
             Assert.AreEqual(Encoding.UTF8, enc);
 
-            enc = EncodingHelper.GetEncodingFromGedcom(@"Assets\Samples\ANSEL.GED");
-            Assert.IsTrue(enc is AnselEncoding);
+            enc = await EncodingHelper.GetEncodingFromGedcom(@"Assets\Samples\ANSEL.GED");
+            Assert.IsTrue(enc is Marc8Encoding);
 
-            enc = EncodingHelper.GetEncodingFromGedcom(@"Assets\Samples\allged.ged");
+            enc = await EncodingHelper.GetEncodingFromGedcom(@"Assets\Samples\allged.ged");
             Assert.AreEqual(Encoding.ASCII, enc);
 
-            enc = EncodingHelper.GetEncodingFromGedcom(@"Assets\Samples\a31486.ged");
+            enc = await EncodingHelper.GetEncodingFromGedcom(@"Assets\Samples\a31486.ged");
             Assert.AreEqual(Encoding.Default, enc);
         }
 
@@ -44,6 +45,29 @@ namespace Gedcom4Sharp.Tests.IO.Reader
             Assert.AreEqual(Encoding.Unicode, enc);
 
             enc = EncodingHelper.GetEncodingFromFile(@"Assets\Samples\utf8.ged");
+            Assert.AreEqual(Encoding.UTF8, enc);
+
+            enc = EncodingHelper.GetEncodingFromFile(@"Assets\Samples\utf8.ged");
+            Assert.AreEqual(Encoding.UTF8, enc);
+        }
+
+        [TestMethod]
+        public async Task TestGetEncoding()
+        {
+            var gp = new GedcomParser();
+            var enc = await EncodingHelper.GetEncoding(@"Assets\Samples\5.5.1 sample 1.ged");
+            //Assert.AreEqual(null, enc);
+
+            enc = await EncodingHelper.GetEncoding(@"Assets\Samples\ANSEL.GED");
+            //Assert.AreEqual(null, enc);
+
+            enc = await EncodingHelper.GetEncoding(@"Assets\Samples\utf16be.ged");
+            //Assert.AreEqual(Encoding.BigEndianUnicode, enc);
+
+            enc = await EncodingHelper.GetEncoding(@"Assets\Samples\utf16le.ged");
+            Assert.AreEqual(Encoding.Unicode, enc);
+
+            enc = await EncodingHelper.GetEncoding(@"Assets\Samples\utf8.ged");
             Assert.AreEqual(Encoding.UTF8, enc);
 
             enc = EncodingHelper.GetEncodingFromFile(@"Assets\Samples\utf8.ged");

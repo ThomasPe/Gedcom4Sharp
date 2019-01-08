@@ -100,6 +100,21 @@ namespace Gedcom4Sharp.Parser
         /// <param name="filePath"></param>
         public async Task Load(string filePath, Encoding encoding = null, IProgress<int> progress = null, CancellationToken cancellationToken = default(CancellationToken))
         {
+            if (File.Exists(filePath))
+            {
+                using (Stream fileStream = new FileStream(filePath, FileMode.Open))
+                {
+                    await Load(fileStream, encoding, progress, cancellationToken);
+                }
+            }
+            else
+            {
+                throw new FileNotFoundException($"{filePath} was not found");
+            }
+        }
+
+        public async Task Load(Stream fileStream, Encoding encoding = null, IProgress<int> progress = null, CancellationToken cancellationToken = default(CancellationToken))
+        {
             Encoding = encoding;
             Gedcom = new Gedcom();
             LineNum = 0;
@@ -108,35 +123,29 @@ namespace Gedcom4Sharp.Parser
             IsCancelled = false;
             _stringTreeBuilder = new StringTreeBuilder(this);
 
-            if (File.Exists(filePath))
-            {
-                if(Encoding == null)
-                {
-                    Encoding = EncodingHelper.GetEncoding(filePath);
-                }
 
-                using (var reader = new StreamReader(filePath, Encoding))
+            if (Encoding == null)
+            {
+                Encoding = await EncodingHelper.GetEncoding(fileStream);
+            }
+            
+            using (var reader = new StreamReader(fileStream, Encoding))
+            {
+                while (reader.Peek() >= 0)
                 {
-                    while (reader.Peek() >= 0)
+                    var line = await reader.ReadLineAsync();
+                    ReadLine(line);
+                    if (progress != null && LineNum % 100 == 0)
                     {
-                        var line = await reader.ReadLineAsync();
-                        ReadLine(line);
-                        if(progress != null && LineNum % 100 == 0)
-                        {
-                            progress.Report(LineNum);
-                        }
-                        if(cancellationToken != CancellationToken.None)
-                        {
-                            cancellationToken.ThrowIfCancellationRequested();
-                        }
+                        progress.Report(LineNum);
+                    }
+                    if (cancellationToken != CancellationToken.None)
+                    {
+                        cancellationToken.ThrowIfCancellationRequested();
                     }
                 }
-                ParseAndLoadPreviousStringTree();
             }
-            else
-            {
-                throw new FileNotFoundException($"{filePath} was not found");
-            }
+            ParseAndLoadPreviousStringTree();
         }
 
         private void ReadLine(string line)

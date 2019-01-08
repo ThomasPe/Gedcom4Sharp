@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Gedcom4Sharp.Parser
 {
@@ -96,8 +98,9 @@ namespace Gedcom4Sharp.Parser
         /// 
         /// </summary>
         /// <param name="filePath"></param>
-        public void Load(string filePath)
+        public async Task Load(string filePath, Encoding encoding = null, IProgress<int> progress = null, CancellationToken cancellationToken = default(CancellationToken))
         {
+            Encoding = encoding;
             Gedcom = new Gedcom();
             LineNum = 0;
             Errors.Clear();
@@ -107,10 +110,26 @@ namespace Gedcom4Sharp.Parser
 
             if (File.Exists(filePath))
             {
-                Encoding = EncodingHelper.GetEncoding(filePath);
-                foreach (string line in File.ReadLines(filePath, Encoding))
+                if(Encoding == null)
                 {
-                    ReadLine(line);
+                    Encoding = EncodingHelper.GetEncoding(filePath);
+                }
+
+                using (var reader = new StreamReader(filePath, Encoding))
+                {
+                    while (reader.Peek() >= 0)
+                    {
+                        var line = await reader.ReadLineAsync();
+                        ReadLine(line);
+                        if(progress != null && LineNum % 100 == 0)
+                        {
+                            progress.Report(LineNum);
+                        }
+                        if(cancellationToken != CancellationToken.None)
+                        {
+                            cancellationToken.ThrowIfCancellationRequested();
+                        }
+                    }
                 }
                 ParseAndLoadPreviousStringTree();
             }
@@ -118,8 +137,6 @@ namespace Gedcom4Sharp.Parser
             {
                 throw new FileNotFoundException($"{filePath} was not found");
             }
-
-
         }
 
         private void ReadLine(string line)
@@ -135,14 +152,7 @@ namespace Gedcom4Sharp.Parser
             {
                 throw new Exception("File load/parse is cancelled");
             }
-            // TODO Notify Parser Status
-            //if (lineNum % parseNotificationRate == 0)
-            //{
-            //    notifyParseObservers(new ParseProgressEvent(this, gedcom, false, lineNum));
-            //}
         }
-
-        
 
         /// <summary>
         /// Parse the {@link StringTreeBuilder}'s string tree in memory, load it into the object model, then discard that string tree buffer

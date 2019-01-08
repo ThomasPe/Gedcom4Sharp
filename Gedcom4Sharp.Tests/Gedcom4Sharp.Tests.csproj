@@ -254,9 +254,6 @@
     <None Include="Assets\Samples\willis.ged">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Assets\stanglmayr.ged">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="packages.config" />
     <Compile Include="Utility\ArrayExtensions.Tests.cs" />
     <Compile Include="Utility\EnumExtensions.Tests.cs" />

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using Gedcom4Sharp.Parser;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -10,11 +11,13 @@ namespace Gedcom4Sharp.Tests.Parser
     public class CustomFactParserTests
     {
         [TestMethod]
-        public void Test()
+        public async Task Test()
         {
-            var gp = new GedcomParser();
-            gp.StrictCustomTags = false;
-            gp.Load(@"Assets\Samples\ftmcustomtags.ged");
+            var gp = new GedcomParser
+            {
+                StrictCustomTags = false
+            };
+            await gp.Load(@"Assets\Samples\ftmcustomtags.ged");
             var g = gp.Gedcom;
             Assert.IsNotNull(g);
 

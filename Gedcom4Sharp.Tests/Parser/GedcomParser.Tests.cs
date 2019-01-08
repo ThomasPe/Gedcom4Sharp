@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using Gedcom4Sharp.Models.Gedcom;
 using Gedcom4Sharp.Parser;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -9,10 +10,10 @@ namespace Gedcom4Sharp.Tests.Parser
     public class GedcomParserTests
     {
         [TestMethod]
-        public void BadCustomTag()
+        public async Task BadCustomTag()
         {
             var gp = new GedcomParser();
-            gp.Load(@"Assets\Samples\Bad_custom_tag.ged");
+            await gp.Load(@"Assets\Samples\Bad_custom_tag.ged");
             Assert.IsNotNull(gp.Errors);
             Assert.AreEqual(1, gp.Errors.Count);
             Assert.IsNotNull(gp.Errors[0]);
@@ -20,19 +21,19 @@ namespace Gedcom4Sharp.Tests.Parser
         }
 
         [TestMethod]
-        public void Load1()
+        public async Task Load1()
         {
             var gp = new GedcomParser();
-            gp.Load(@"Assets\Samples\TGC551.ged");
+            await gp.Load(@"Assets\Samples\TGC551.ged");
             CheckTGC551LF(gp);
         }
 
         [TestMethod]
-        public void Load2()
+        public async Task Load2()
         {
             var gp = new GedcomParser();
             Assert.IsTrue(gp.Errors.Count == 0);
-            gp.Load(@"Assets\Samples\allged.ged");
+            await gp.Load(@"Assets\Samples\allged.ged");
             Assert.IsTrue(gp.Errors.Count == 0);
             Assert.IsTrue(gp.Warnings.Count == 0);
 
@@ -48,10 +49,10 @@ namespace Gedcom4Sharp.Tests.Parser
         }
 
         [TestMethod]
-        public void Load3()
+        public async Task Load3()
         {
             var gp = new GedcomParser();
-            gp.Load(@"Assets\Samples\a31486.ged");
+            await gp.Load(@"Assets\Samples\a31486.ged");
             Assert.IsTrue(gp.Errors.Count == 0);
             Assert.IsTrue(gp.Warnings.Count == 0);
 
@@ -90,11 +91,11 @@ namespace Gedcom4Sharp.Tests.Parser
         }
 
         [TestMethod]
-        public void Load4()
+        public async Task Load4()
         {
             var gp = new GedcomParser();
             // Different line end char seq than the other file
-            gp.Load(@"Assets\Samples\TGC551LF.ged");
+            await gp.Load(@"Assets\Samples\TGC551LF.ged");
             CheckTGC551LF(gp);
         }
 
@@ -103,10 +104,10 @@ namespace Gedcom4Sharp.Tests.Parser
         /// level, even though the spec says not to. However, the spec also says to ignore leading spaces on lines, so we're doing that.
         /// </summary>
         [TestMethod]
-        public void TestLoadIndentedMinimal55File()
+        public async Task TestLoadIndentedMinimal55File()
         {
             var gp = new GedcomParser();
-            gp.Load(@"Assets\Samples\minimal55indented.ged");
+            await gp.Load(@"Assets\Samples\minimal55indented.ged");
 
             // No problems detected, right?
             Assert.AreEqual(0, gp.Errors.Count);
@@ -125,10 +126,10 @@ namespace Gedcom4Sharp.Tests.Parser
         /// Test loading a minimal GEDCOM 5.5 file that only has a submitter.
         /// </summary>
         [TestMethod]
-        public void TestLoadMinimal55File()
+        public async Task TestLoadMinimal55File()
         {
             var gp = new GedcomParser();
-            gp.Load(@"Assets\Samples\minimal55.ged");
+            await gp.Load(@"Assets\Samples\minimal55.ged");
 
             // No problems detected, right?
             Assert.AreEqual(0, gp.Errors.Count);
@@ -146,10 +147,10 @@ namespace Gedcom4Sharp.Tests.Parser
         // TODO public void TestLoadStream()
 
         [TestMethod]
-        public void TestLoadTGC55C()
+        public async Task TestLoadTGC55C()
         {
             var gp = new GedcomParser();
-            gp.Load(@"Assets\Samples\TGC55C.ged");
+            await gp.Load(@"Assets\Samples\TGC55C.ged");
             CheckTGC55C(gp);
         }
 

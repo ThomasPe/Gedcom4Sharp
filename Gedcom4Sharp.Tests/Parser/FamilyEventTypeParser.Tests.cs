@@ -1,6 +1,7 @@
 ﻿using Gedcom4Sharp.Models.Gedcom;
 using Gedcom4Sharp.Parser;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Threading.Tasks;
 
 namespace Gedcom4Sharp.Tests.Parser
 {
@@ -10,10 +11,10 @@ namespace Gedcom4Sharp.Tests.Parser
         private Gedcom g;
 
         [TestInitialize]
-        public void TestInitialize()
+        public async Task TestInitialize()
         {
             var gp = new GedcomParser();
-            gp.Load(@"Assets\Samples\TGC551.ged");
+            await gp.Load(@"Assets\Samples\TGC551.ged");
             g = gp.Gedcom;
         }
 

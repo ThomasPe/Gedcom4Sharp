@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using Gedcom4Sharp.Models.Gedcom;
 using Gedcom4Sharp.Models.Gedcom.Enums;
 using Gedcom4Sharp.Parser;
@@ -14,10 +15,10 @@ namespace Gedcom4Sharp.Tests.Parser
         /// Test that header copyright data is now multi-line capable
         /// </summary>
         [TestMethod]
-        public void TestContinuationForCopyright()
+        public async Task TestContinuationForCopyright()
         {
             var gp = new GedcomParser();
-            gp.Load(@"Assets\Samples\john_of_sea_20101009.ged");
+            await gp.Load(@"Assets\Samples\john_of_sea_20101009.ged");
             Assert.AreEqual(0, gp.Errors.Count);
             // There should be a warning because the file says it's 5.5 but has 5.5.1 tags in it"
             // TODO: Can't check if its 5.5 as the Version Tag comes after the Copyright Tag
@@ -34,10 +35,10 @@ namespace Gedcom4Sharp.Tests.Parser
         /// Test for parsing of the new "EMAIL" tag in 5.5.1
         /// </summary>
         [TestMethod]
-        public void TestEmail()
+        public async Task TestEmail()
         {
             var gp = new GedcomParser();
-            gp.Load(@"Assets\Samples\5.5.1 sample 3.ged");
+            await gp.Load(@"Assets\Samples\5.5.1 sample 3.ged");
             var g = gp.Gedcom;
 
             Assert.IsNotNull(g);
@@ -55,10 +56,10 @@ namespace Gedcom4Sharp.Tests.Parser
         /// Test for parsing of the new "FACT" tag in 5.5.1
         /// </summary>
         [TestMethod]
-        public void TestFact()
+        public async Task TestFact()
         {
             var gp = new GedcomParser();
-            gp.Load(@"Assets\Samples\john_of_sea_20101009.ged");
+            await gp.Load(@"Assets\Samples\john_of_sea_20101009.ged");
             Assert.AreEqual(0, gp.Errors.Count);
             // There should be a warning because the file says it's 5.5 but has 5.5.1 tags in it
             // TODO: Theres no warning as the version is read too late from the file
@@ -83,10 +84,10 @@ namespace Gedcom4Sharp.Tests.Parser
         /// Test for parsing of the new "FAX" tag in 5.5.1
         /// </summary>
         [TestMethod]
-        public void TestFax()
+        public async Task TestFax()
         {
             var gp = new GedcomParser();
-            gp.Load(@"Assets\Samples\5.5.1 sample 3.ged");
+            await gp.Load(@"Assets\Samples\5.5.1 sample 3.ged");
             var g = gp.Gedcom;
 
             Assert.IsNotNull(g);
@@ -106,10 +107,10 @@ namespace Gedcom4Sharp.Tests.Parser
         /// Test for parsing of the new "FONE" tag on a personal name in 5.5.1
         /// </summary>
         [TestMethod]
-        public void TestFoneName()
+        public async Task TestFoneName()
         {
             var gp = new GedcomParser();
-            gp.Load(@"Assets\Samples\5.5.1 sample 2.ged");
+            await gp.Load(@"Assets\Samples\5.5.1 sample 2.ged");
             var g = gp.Gedcom;
 
             Assert.AreEqual(0, gp.Errors.Count);
@@ -131,10 +132,10 @@ namespace Gedcom4Sharp.Tests.Parser
         }
 
         [TestMethod]
-        public void TestFonePlace()
+        public async Task TestFonePlace()
         {
             var gp = new GedcomParser();
-            gp.Load(@"Assets\Samples\5.5.1 sample 4.ged");
+            await gp.Load(@"Assets\Samples\5.5.1 sample 4.ged");
             var g = gp.Gedcom;
 
             Assert.AreEqual(0, gp.Errors.Count);
@@ -164,10 +165,10 @@ namespace Gedcom4Sharp.Tests.Parser
         // TODO Finish Tests
 
         [TestMethod]
-        public void TestMapLatLong()
+        public async Task TestMapLatLong()
         {
             var gp = new GedcomParser();
-            gp.Load(@"Assets\Samples\5.5.1 sample 4.ged");
+            await gp.Load(@"Assets\Samples\5.5.1 sample 4.ged");
             var g = gp.Gedcom;
 
             Assert.AreEqual(0, gp.Errors.Count);
@@ -190,10 +191,10 @@ namespace Gedcom4Sharp.Tests.Parser
         }
 
         [TestMethod]
-        public void TestMultimediaChanges1()
+        public async Task TestMultimediaChanges1()
         {
             var gp = new GedcomParser();
-            gp.Load(@"Assets\Samples\TGC551.ged");
+            await gp.Load(@"Assets\Samples\TGC551.ged");
             foreach(var w in gp.Warnings)
             {
                 Assert.IsFalse(w.Contains("BLOB"));
@@ -202,12 +203,12 @@ namespace Gedcom4Sharp.Tests.Parser
         }
 
         [TestMethod]
-        public void TestMultimediaChanges2()
+        public async Task TestMultimediaChanges2()
         {
             var gp = new GedcomParser();
 
             // 5.5.1 data with a BLOB - illegal
-            gp.Load(@"Assets\Samples\5.5.1 sample 4.ged");
+            await gp.Load(@"Assets\Samples\5.5.1 sample 4.ged");
             Assert.AreEqual(0, gp.Errors.Count);
             Assert.AreNotEqual(0, gp.Warnings.Count);
 
@@ -225,11 +226,11 @@ namespace Gedcom4Sharp.Tests.Parser
 
 
         [TestMethod]
-        public void TestMultimediaChanges3()
+        public async Task TestMultimediaChanges3()
         {
             var gp = new GedcomParser();
             // 5.5 data, has a blob - OK
-            gp.Load(@"Assets\Samples\5.5.1 sample 1.ged");
+            await gp.Load(@"Assets\Samples\5.5.1 sample 1.ged");
             Assert.AreEqual(0, gp.Errors.Count);
 
             foreach (var w in gp.Warnings)
@@ -243,10 +244,10 @@ namespace Gedcom4Sharp.Tests.Parser
         /// Test the file references sections for a multimedia object
         /// </summary>
         [TestMethod]
-        public void TestMultimediaFileRef()
+        public async Task TestMultimediaFileRef()
         {
             var gp = new GedcomParser();
-            gp.Load(@"Assets\Samples\5.5.1 sample 5.ged");
+            await gp.Load(@"Assets\Samples\5.5.1 sample 5.ged");
             Assert.AreEqual(0, gp.Errors.Count);
         }
 
@@ -254,10 +255,10 @@ namespace Gedcom4Sharp.Tests.Parser
         /// Test the new religious affiliation tag added to family events in GEDCOM 5.5.1
         /// </summary>
         [TestMethod]
-        public void TestReligionOnFamilyEventDetail()
+        public async Task TestReligionOnFamilyEventDetail()
         {
             var gp = new GedcomParser();
-            gp.Load(@"Assets\Samples\5.5.1 sample 1.ged");
+            await gp.Load(@"Assets\Samples\5.5.1 sample 1.ged");
             Assert.AreEqual(0, gp.Errors.Count);
             Assert.AreEqual(0, gp.Warnings.Count);
 
@@ -286,10 +287,10 @@ namespace Gedcom4Sharp.Tests.Parser
         /// Test the new restriction tag on Families added in GEDCOM 5.5.1
         /// </summary>
         [TestMethod]
-        public void TestRestrictionOnEvent()
+        public async Task TestRestrictionOnEvent()
         {
             var gp = new GedcomParser();
-            gp.Load(@"Assets\Samples\5.5.1 sample 3.ged");
+            await gp.Load(@"Assets\Samples\5.5.1 sample 3.ged");
             Assert.AreEqual(0, gp.Errors.Count);
             // There should be a warning because the file says it's 5.5 but has 5.5.1 tags in it
             Assert.AreNotEqual(0, gp.Warnings.Count);
@@ -318,10 +319,10 @@ namespace Gedcom4Sharp.Tests.Parser
         /// Test the new restriction tag on Families added in GEDCOM 5.5.1
         /// </summary>
         [TestMethod]
-        public void TestRestrictionOnFamily()
+        public async Task TestRestrictionOnFamily()
         {
             var gp = new GedcomParser();
-            gp.Load(@"Assets\Samples\5.5.1 sample 3.ged");
+            await gp.Load(@"Assets\Samples\5.5.1 sample 3.ged");
             Assert.AreEqual(0, gp.Errors.Count);
             // There should be a warning because the file says it's 5.5 but has 5.5.1 tags in it
             Assert.AreNotEqual(0, gp.Warnings.Count);
@@ -341,10 +342,10 @@ namespace Gedcom4Sharp.Tests.Parser
         /// Test for parsing of the new "ROMN" tag on a personal name in 5.5.1
         /// </summary>
         [TestMethod]
-        public void TestRomnName()
+        public async Task TestRomnName()
         {
             var gp = new GedcomParser();
-            gp.Load(@"Assets\Samples\5.5.1 sample 3.ged");
+            await gp.Load(@"Assets\Samples\5.5.1 sample 3.ged");
             Assert.AreEqual(0, gp.Errors.Count);
             // There should be a warning because the file says it's 5.5 but has 5.5.1 tags in it
             Assert.AreNotEqual(0, gp.Warnings.Count);
@@ -366,10 +367,10 @@ namespace Gedcom4Sharp.Tests.Parser
         /// Test parsing the ROMN tag on places in GEDCOM 5.5.1
         /// </summary>
         [TestMethod]
-        public void TestRomnPlace()
+        public async Task TestRomnPlace()
         {
             var gp = new GedcomParser();
-            gp.Load(@"Assets\Samples\5.5.1 sample 4.ged");
+            await gp.Load(@"Assets\Samples\5.5.1 sample 4.ged");
             Assert.AreEqual(0, gp.Errors.Count);
             // There should be a warning because the file says it's 5.5 but has 5.5.1 tags in it
             Assert.AreNotEqual(0, gp.Warnings.Count);
@@ -398,10 +399,10 @@ namespace Gedcom4Sharp.Tests.Parser
         /// Test for parsing of the new STAT sub-tag on FAMC tags in 5.5.1
         /// </summary>
         [TestMethod]
-        public void TestStatusOnFamilyChild()
+        public async Task TestStatusOnFamilyChild()
         {
             var gp = new GedcomParser();
-            gp.Load(@"Assets\Samples\5.5.1 sample 1.ged");
+            await gp.Load(@"Assets\Samples\5.5.1 sample 1.ged");
             Assert.AreEqual(0, gp.Errors.Count);
             Assert.AreEqual(0, gp.Warnings.Count);
             var g = gp.Gedcom;
@@ -433,10 +434,10 @@ namespace Gedcom4Sharp.Tests.Parser
         /// Test for parsing of the new "WWW" tag in 5.5.1
         /// </summary>
         [TestMethod]
-        public void TestWWW()
+        public async Task TestWWW()
         {
             var gp = new GedcomParser();
-            gp.Load(@"Assets\Samples\5.5.1 sample 3.ged");
+            await gp.Load(@"Assets\Samples\5.5.1 sample 3.ged");
             Assert.AreEqual(0, gp.Errors.Count);
             // There should be a warning because the file says it's 5.5 but has 5.5.1 tags in it
             Assert.AreNotEqual(0, gp.Warnings.Count);

@@ -15,11 +15,13 @@ namespace Gedcom4Sharp.Tests.Parser
     {
 
         [TestMethod]
-        public void TestLoadAllSamples()
+        public async Task TestLoadAllSamples()
         {
-            GedcomParser gp = new GedcomParser();
-            gp.StrictCustomTags = false;
-            gp.StrictLineBreaks = false;
+            GedcomParser gp = new GedcomParser
+            {
+                StrictCustomTags = false,
+                StrictLineBreaks = false
+            };
 
             var folderPath = @"Assets\Samples\";
             foreach (string file in Directory.EnumerateFiles(folderPath, "*.ged"))
@@ -27,7 +29,7 @@ namespace Gedcom4Sharp.Tests.Parser
                 try
                 {
                     gp.Gedcom = null;
-                    gp.Load(file);
+                    await gp.Load(file);
                     Assert.IsNotNull(gp.Gedcom);
                 }
                 catch (Exception ex)

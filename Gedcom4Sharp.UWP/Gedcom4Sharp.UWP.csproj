@@ -155,6 +155,12 @@
       <Version>6.2.3</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Gedcom4Sharp\Gedcom4Sharp.csproj">
+      <Project>{936f8517-7716-462c-b206-4e29f67a565f}</Project>
+      <Name>Gedcom4Sharp</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

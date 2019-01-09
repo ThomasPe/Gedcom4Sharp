@@ -9,6 +9,10 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-
+        <StackPanel>
+            <Button x:Name="LoadGedcomBtn" Content="Load Gedcom" Click="LoadGedcomBtn_Click" />
+            <Button x:Name="CancelLoadBtn" Content="Cancel" Click="CancelLoadBtn_Click"/>
+            <TextBlock x:Name="ProgressTB"></TextBlock>
+        </StackPanel>
     </Grid>
 </Page>

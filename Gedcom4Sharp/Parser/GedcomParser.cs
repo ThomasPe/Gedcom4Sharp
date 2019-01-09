@@ -128,24 +128,26 @@ namespace Gedcom4Sharp.Parser
             {
                 Encoding = await EncodingHelper.GetEncoding(fileStream);
             }
-            
-            using (var reader = new StreamReader(fileStream, Encoding))
+            await Task.Run(async () =>
             {
-                while (reader.Peek() >= 0)
+                using (var reader = new StreamReader(fileStream, Encoding))
                 {
-                    var line = await reader.ReadLineAsync();
-                    ReadLine(line);
-                    if (progress != null && LineNum % 100 == 0)
+                    while (reader.Peek() >= 0)
                     {
-                        progress.Report(LineNum);
-                    }
-                    if (cancellationToken != CancellationToken.None)
-                    {
-                        cancellationToken.ThrowIfCancellationRequested();
+                        var line = await reader.ReadLineAsync();
+                        ReadLine(line);
+                        if (progress != null && LineNum % 100 == 0)
+                        {
+                            progress.Report(LineNum);
+                        }
+                        if (cancellationToken != CancellationToken.None)
+                        {
+                            cancellationToken.ThrowIfCancellationRequested();
+                        }
                     }
                 }
-            }
-            ParseAndLoadPreviousStringTree();
+                ParseAndLoadPreviousStringTree();
+            });
         }
 
         private void ReadLine(string line)
